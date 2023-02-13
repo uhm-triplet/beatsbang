@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class MPlayerWeapon : MonoBehaviour
+public class MPlayerWeapon : NetworkBehaviour
 {
     bool fDown;
     // bool f2Down;
@@ -29,17 +30,19 @@ public class MPlayerWeapon : MonoBehaviour
         rDown = Input.GetButtonDown("Reload");
     }
 
-    void Awake()
+    public override void OnNetworkSpawn()
     {
-        playerMove = GetComponentInParent<MPlayerMove>();
+        animator = GetComponentInChildren<Animator>();
         playerState = GetComponentInParent<MPlayerState>();
         playerAim = GetComponentInParent<MPlayerAim>();
-        animator = GetComponentInChildren<Animator>();
+        if (!IsOwner) return;
+        playerMove = GetComponentInParent<MPlayerMove>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         GetInput();
         Attack();
         Grenade();
@@ -59,9 +62,9 @@ public class MPlayerWeapon : MonoBehaviour
 
         if (fDown && isFireReady && !isReloading && !playerMove.isDodge)
         {
-            playerState.equipWeapon.Use();
-            animator.SetTrigger("doShot");
-            fireDelay = 0;
+
+            AttackServerRpc();
+            localAttack();
         }
         // if (f2Down && isFire2Ready && !playerMove.isDodge)
         // {
@@ -71,21 +74,57 @@ public class MPlayerWeapon : MonoBehaviour
         // }
     }
 
+    void localAttack()
+    {
+        animator.SetTrigger(playerState.equipWeapon.type == MWeapon.Type.Melee ? "doSwing" : "doShot");
+        playerState.equipWeapon.Use();
+        fireDelay = 0;
+    }
+    [ServerRpc]
+    void AttackServerRpc()
+    {
+        AttackClientRpc();
+    }
+
+    [ClientRpc]
+    void AttackClientRpc()
+    {
+        if (!IsOwner) localAttack();
+    }
+
     void Grenade()
     {
         if (playerState.hasGrenades == 0) return;
         if (gDown && !isReloading)
         {
-            grenadePos.LookAt(playerAim.aimPos);
-            GameObject instantGrenade = Instantiate(grenadeObj, grenadePos.position, grenadePos.rotation);
-            Rigidbody grenadeRigid = instantGrenade.GetComponent<Rigidbody>();
-            grenadeRigid.AddForce(grenadePos.forward * 20, ForceMode.Impulse);
-            grenadeRigid.AddForce(grenadePos.up * 10, ForceMode.Impulse);
-            grenadeRigid.AddTorque(Vector3.back * 10, ForceMode.Impulse);
-
-            playerState.hasGrenades -= 1;
-            playerState.grenades[playerState.hasGrenades].SetActive(false);
+            GrenadeServerRpc();
+            localGrenade();
         }
+    }
+
+    void localGrenade()
+    {
+        animator.SetTrigger("doShot");
+        grenadePos.LookAt(playerAim.aimPos);
+        GameObject instantGrenade = Instantiate(grenadeObj, grenadePos.position, grenadePos.rotation);
+        Rigidbody grenadeRigid = instantGrenade.GetComponent<Rigidbody>();
+        grenadeRigid.AddForce(grenadePos.forward * 20, ForceMode.Impulse);
+        grenadeRigid.AddForce(grenadePos.up * 10, ForceMode.Impulse);
+        grenadeRigid.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+
+        playerState.hasGrenades -= 1;
+        playerState.grenades[playerState.hasGrenades].SetActive(false);
+    }
+    [ServerRpc]
+    void GrenadeServerRpc()
+    {
+        GrenadeClientRpc();
+    }
+
+    [ClientRpc]
+    void GrenadeClientRpc()
+    {
+        if (!IsOwner) localGrenade();
     }
 
     void Reload()

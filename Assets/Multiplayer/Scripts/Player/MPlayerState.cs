@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class MPlayerState : MonoBehaviour
+public class MPlayerState : NetworkBehaviour
 {
     public GameObject[] weapons;
     public int hasWeapon = -1;
@@ -10,8 +11,8 @@ public class MPlayerState : MonoBehaviour
     public GameObject[] grenades;
     public int hasGrenades;
     public int ammo;
-    public int health;
-
+    public int health = 100;
+    // public NetworkVariable<int> health = new NetworkVariable<int>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public int maxAmmo;
     public int maxHealth;
     public int maxHasGrenades;
@@ -30,26 +31,32 @@ public class MPlayerState : MonoBehaviour
     Vector3 impact = Vector3.zero;
     private CharacterController controller;
 
-
+    [SerializeField] GameObject UI;
     bool oneDown;
     bool twoDown;
     bool threeDown;
+    [HideInInspector] public bool isDead = false;
 
-    void Awake()
+    public override void OnNetworkSpawn()
     {
-        impact.z = -50;
-        animator = GetComponentInChildren<Animator>();
-        rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
+        animator = GetComponentInChildren<Animator>();
+        if (!IsOwner) return;
+        UI.SetActive(true);
+        impact.z = -50;
+        rigid = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         // Interaction();
         getInput();
         Swap();
+        Die();
+
     }
 
     void getInput()
@@ -64,88 +71,164 @@ public class MPlayerState : MonoBehaviour
     {
         if (oneDown)
         {
-            SwapLogic(0);
+            SwapServerRpc(0);
+            localSwap(0);
         }
         if (twoDown)
         {
-            SwapLogic(1);
-
+            SwapServerRpc(1);
+            localSwap(1);
         }
         if (threeDown)
         {
-            SwapLogic(2);
-
+            SwapServerRpc(2);
+            localSwap(2);
         }
     }
 
-    void SwapLogic(int weaponNo)
+    void localSwap(int weaponNumber)
     {
-        hasWeapon = weaponNo;
-        if (equipWeapon != null) equipWeapon.gameObject.SetActive(false);
-        equipWeapon = weapons[hasWeapon].GetComponent<MWeapon>();
-        equipWeapon.gameObject.SetActive(true);
-
         animator.SetTrigger("doSwap");
+        hasWeapon = weaponNumber;
+        if (equipWeapon != null) equipWeapon.gameObject.SetActive(false);
+        weapons[hasWeapon].GetComponent<MWeapon>().gameObject.SetActive(true);
+        equipWeapon = weapons[hasWeapon].GetComponent<MWeapon>();
+    }
+
+    [ServerRpc]
+    void SwapServerRpc(int weaponNumber)
+    {
+        SwapClientRpc(weaponNumber);
+    }
+
+    [ClientRpc]
+    void SwapClientRpc(int weaponNumber)
+    {
+        if (!IsOwner) localSwap(weaponNumber);
     }
 
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Item")
+        // if (other.tag == "Item")
+        // {
+        //     Item item = other.GetComponent<Item>();
+        //     switch (item.type)
+        //     {
+        //         case Item.Type.Grenade:
+        //             if (hasGrenades == maxHasGrenades)
+        //                 break;
+        //             grenades[hasGrenades].SetActive(true);
+        //             hasGrenades += item.value;
+        //             break;
+        //     }
+        //     Destroy(other.gameObject);
+        // }
+
+
+        if (other.tag == "Bullet")
         {
-            Item item = other.GetComponent<Item>();
-            switch (item.type)
-            {
-                case Item.Type.Grenade:
-                    if (hasGrenades == maxHasGrenades)
-                        break;
-                    grenades[hasGrenades].SetActive(true);
-                    hasGrenades += item.value;
-                    break;
-            }
-            Destroy(other.gameObject);
+            OnDamageClientRpc();
+            LocalOnDamage();
         }
-        else if (other.tag == "EnemyBullet")
+        if (other.tag == "Melee")
         {
-            if (!isDamage)
-            {
-                Bullet enemyBullet = other.GetComponent<Bullet>();
-                health -= enemyBullet.damage;
-                bool isBossAttack = other.name == "BossMeleeArea";
 
-                StartCoroutine(OnDamage(isBossAttack));
-            }
-            if (other.GetComponent<Rigidbody>() != null)
-            {
-                other.gameObject.GetComponent<Bullet>().OnHit();
-
-            }
+            health -= 1;
+            OnDamageClientRpc();
+            LocalOnDamage();
         }
 
     }
-    IEnumerator OnDamage(bool isBossAttack)
+
+    public void LocalOnDamage()
+    {
+        StartCoroutine(OnDamage());
+    }
+
+    [ServerRpc]
+    void OnDamageServerRpc()
+    {
+        OnDamageClientRpc();
+    }
+
+    [ClientRpc]
+    public void OnDamageClientRpc()
+    {
+        if (IsOwner) return;
+        LocalOnDamage();
+    }
+
+
+    public void HitByGrenade()
+    {
+        health = 0;
+        StartCoroutine(OnDamage());
+    }
+
+    IEnumerator OnDamage()
     {
         isDamage = true;
         foreach (MeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.yellow;
         }
-        if (isBossAttack)
-        {
-            //find better logic
-            controller.Move(impact * 10 * Time.deltaTime);
 
-        }
 
-        yield return new WaitForSeconds(1f);
-        if (isBossAttack)
-            rigid.velocity = Vector3.zero;
-        isDamage = false;
+        yield return new WaitForSeconds(0.5f);
+
         foreach (MeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.white;
         }
 
+    }
+
+    void Die()
+    {
+        if (health <= 0 && !isDead)
+        {
+            DieServerRpc();
+            LocalDie();
+        }
+    }
+    public void LocalDie()
+    {
+        animator.SetTrigger("doDie");
+        isDead = true;
+        if (gameObject.tag == "Player")
+        {
+            ScoreManager.Instance.playerADeath++;
+            ScoreManager.Instance.playerBKill++;
+        }
+        else
+        {
+            ScoreManager.Instance.playerBDeath++;
+            ScoreManager.Instance.playerAKill++;
+        }
+        StartCoroutine(DoRevive());
+
+    }
+
+    [ServerRpc]
+    void DieServerRpc()
+    {
+        DieClientRpc();
+    }
+
+    [ClientRpc]
+    public void DieClientRpc()
+    {
+        if (IsOwner) return;
+        LocalDie();
+    }
+
+
+    IEnumerator DoRevive()
+    {
+        yield return new WaitForSeconds(5);
+        isDead = false;
+        health = 100;
     }
 
 

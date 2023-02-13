@@ -7,7 +7,7 @@ using BeatsBang.Core.BeatsBang.Manager;
 
 namespace Game
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : NetworkBehaviour
     {
         void Start()
         {
@@ -24,16 +24,20 @@ namespace Game
                 (byte[] allocationId, byte[] key, byte[] connectionData, byte[] hostConnectionData, string ip, int port) = RelayManager.Instance.GetClientConnectionInfo();
                 NetworkManager.Singleton.GetComponent<UnityTransport>().SetClientRelayData(ip, (ushort)port, allocationId, key, connectionData, hostConnectionData, true);
                 NetworkManager.Singleton.StartClient();
+
             }
         }
+
+
 
 
         private void ConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
             response.Approved = true;
-            response.CreatePlayerObject = true;
+            response.CreatePlayerObject = false;
             response.Pending = false;
         }
+
     }
 
 }
