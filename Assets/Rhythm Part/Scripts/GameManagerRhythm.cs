@@ -21,7 +21,7 @@ public class GameManagerRhythm : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        
+        Destroy(col.gameObject);
     }
 
     public void AddStreak() {
