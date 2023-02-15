@@ -8,31 +8,47 @@ public class Activator : MonoBehaviour
     SpriteRenderer sr;
     public KeyCode key;
     bool active = false;
-    GameObject note;
+    GameObject note, gm;
     Color original;
+
+    public bool createMode;
+    public GameObject createNote;
+
 
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        gm = GameObject.Find("GameManagerRhythm");
         original = sr.color;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(key)) {
-            StartCoroutine(Clicked());
+    void Update() {
+        if (createMode) {
+            if (Input.GetKeyDown(key)) {
+                Instantiate(createNote, transform.position, Quaternion.identity);
+            }
         }
 
-        if (Input.GetKeyDown(key) && active)
-        {
-            Destroy(note.gameObject);
-            AddScore();
-            active = false;
+        else {
+            if (Input.GetKeyDown(key)) {
+                StartCoroutine(Clicked());
+            }
+
+            if (Input.GetKeyDown(key) && active)
+            {
+                Destroy(note.gameObject);
+                gm.GetComponent<GameManagerRhythm>().AddStreak();
+                AddScore();
+                active = false;
+            } 
+            
+            else if (Input.GetKeyDown(key) &&! active) {
+                gm.GetComponent<GameManagerRhythm>().ResetStreak();
+            }
         }
     }
 
@@ -50,10 +66,11 @@ public class Activator : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         active = false;
+        gm.GetComponent<GameManagerRhythm>().ResetStreak();
     }
 
     void AddScore() {
-        PlayerPrefs.SetInt("Score",PlayerPrefs.GetInt("Score")+100);
+        PlayerPrefs.SetInt("Score",PlayerPrefs.GetInt("Score")+gm.GetComponent<GameManagerRhythm>().GetScore());
         Debug.Log(PlayerPrefs.GetInt("Score"));
     }
 
