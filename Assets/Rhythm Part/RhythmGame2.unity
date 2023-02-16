@@ -999,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320291, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: createMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320291, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: createNote
@@ -1952,7 +1952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320291, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: createMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320291, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: createNote
