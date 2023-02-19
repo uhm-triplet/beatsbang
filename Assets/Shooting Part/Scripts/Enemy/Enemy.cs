@@ -23,8 +23,16 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public NavMeshAgent nav;
     [HideInInspector] public Animator animator;
     public GameObject effectObj;
+
+    public AudioSource hitSound;
+    public AudioSource dieSound;
+    public AudioSource bossDieSound;
+
     void Awake()
     {
+        hitSound = GameObject.Find("SFX/Enemy/Hit").GetComponent<AudioSource>();
+        dieSound = GameObject.Find("SFX/Enemy/Die").GetComponent<AudioSource>();
+        bossDieSound = GameObject.Find("SFX/Enemy/BossDie").GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         meshs = GetComponentsInChildren<MeshRenderer>();
@@ -185,7 +193,14 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Melee")
+        {
+            Weapon weapon = other.GetComponent<Weapon>();
+            currentHealth -= weapon.damage;
 
+            StartCoroutine(OnDamage());
+
+        }
         if (other.tag == "Bullet")
         {
             Bullet bullet = other.GetComponent<Bullet>();
@@ -206,6 +221,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     IEnumerator OnDamage()
     {
+        Debug.Log(hitSound);
+        hitSound.Play();
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
 
@@ -222,7 +239,14 @@ public class Enemy : MonoBehaviour
             nav.enabled = false;
             animator.SetTrigger("doDie");
             if (isBoss)
+            {
                 effectObj.SetActive(true);
+                bossDieSound.Play();
+            }
+            else
+            {
+                dieSound.Play();
+            }
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.gray;
             gameObject.layer = 11;

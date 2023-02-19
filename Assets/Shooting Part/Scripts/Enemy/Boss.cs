@@ -14,6 +14,9 @@ public class Boss : Enemy
     public bool isLook;
     public bool isAttacking;
 
+
+
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -21,9 +24,19 @@ public class Boss : Enemy
         meshs = GetComponentsInChildren<MeshRenderer>();
         nav = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-
         nav.isStopped = true;
+
     }
+
+    void Start()
+    {
+        hitSound = GameObject.Find("SFX/Enemy/Hit").GetComponent<AudioSource>();
+        dieSound = GameObject.Find("SFX/Enemy/Die").GetComponent<AudioSource>();
+        bossDieSound = GameObject.Find("SFX/Enemy/BossDie").GetComponent<AudioSource>();
+
+    }
+
+
 
     void Update()
     {

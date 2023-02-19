@@ -11,7 +11,12 @@ public class Bullet : MonoBehaviour
     public GameObject effectObj;
 
     public Rigidbody rigid;
+    private AudioSource bulletCaseSound;
 
+    void Awake()
+    {
+        bulletCaseSound = GameObject.Find("SFX/Bullet/BulletCase").GetComponent<AudioSource>();
+    }
     private void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody>();
@@ -19,11 +24,11 @@ public class Bullet : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        //사라지는 기준 정확하게 바꾸기
         if (!isRock && other.gameObject.tag == "Floor")
         {
+            bulletCaseSound.Play();
+            // AudioSource.PlayClipAtPoint(bulletCaseSound.clip, transform.position);
             Destroy(gameObject, 1);
-
         }
 
     }

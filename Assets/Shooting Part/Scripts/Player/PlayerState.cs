@@ -35,8 +35,12 @@ public class PlayerState : MonoBehaviour
     bool twoDown;
     bool threeDown;
 
+    private AudioSource hitSound;
+
+
     void Awake()
     {
+        hitSound = GameObject.Find("SFX/Player/Hit").GetComponent<AudioSource>();
         impact.z = -50;
         animator = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
@@ -80,6 +84,7 @@ public class PlayerState : MonoBehaviour
 
     void SwapLogic(int weaponNo)
     {
+
         hasWeapon = weaponNo;
         if (equipWeapon != null) equipWeapon.gameObject.SetActive(false);
         equipWeapon = weapons[hasWeapon].GetComponent<Weapon>();
@@ -126,6 +131,8 @@ public class PlayerState : MonoBehaviour
     IEnumerator OnDamage(bool isBossAttack)
     {
         isDamage = true;
+        hitSound.Play();
+
         foreach (MeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.yellow;

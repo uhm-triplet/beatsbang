@@ -21,6 +21,11 @@ public class PlayerWeapon : MonoBehaviour
     PlayerMove playerMove;
     PlayerAim playerAim;
 
+
+    private AudioSource shootSound;
+    private AudioSource swingSound;
+    private AudioSource reloadSound;
+
     void GetInput()
     {
         fDown = Input.GetButton("Fire1");
@@ -31,6 +36,9 @@ public class PlayerWeapon : MonoBehaviour
 
     void Awake()
     {
+        shootSound = GameObject.Find("SFX/Player/Shoot").GetComponent<AudioSource>();
+        swingSound = GameObject.Find("SFX/Player/Swing").GetComponent<AudioSource>();
+        reloadSound = GameObject.Find("SFX/Player/Reload").GetComponent<AudioSource>();
         playerMove = GetComponentInParent<PlayerMove>();
         playerState = GetComponentInParent<PlayerState>();
         playerAim = GetComponentInParent<PlayerAim>();
@@ -59,9 +67,13 @@ public class PlayerWeapon : MonoBehaviour
 
         if (fDown && isFireReady && !isReloading && !playerMove.isDodge)
         {
+            if (playerState.equipWeapon.type == Weapon.Type.Melee) swingSound.Play();
+            else shootSound.Play();
+
+            animator.SetTrigger(playerState.equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
             playerState.equipWeapon.Use();
-            animator.SetTrigger("doShot");
             fireDelay = 0;
+
         }
         // if (f2Down && isFire2Ready && !playerMove.isDodge)
         // {
@@ -97,8 +109,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             animator.SetTrigger("doReload");
             isReloading = true;
-            Debug.Log("Reload");
-
+            reloadSound.Play();
             Invoke("ReloadOut", 3f);
         }
     }

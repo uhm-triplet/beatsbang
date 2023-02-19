@@ -7,9 +7,20 @@ public class Grenade : MonoBehaviour
     public GameObject meshObj;
     public GameObject effectObj;
     public Rigidbody rigid;
+
+    private AudioSource throwSound;
+    private AudioSource explodeSound;
     // Start is called before the first frame update
+    void Awake()
+    {
+        throwSound = GameObject.Find("SFX/Grenade/Throw").GetComponent<AudioSource>();
+        explodeSound = GameObject.Find("SFX/Grenade/Explosion").GetComponent<AudioSource>();
+    }
+
     void Start()
     {
+        throwSound.Play();
+        // AudioSource.PlayClipAtPoint(throwSound, transform.position);
         StartCoroutine(Explosion());
     }
 
@@ -27,6 +38,8 @@ public class Grenade : MonoBehaviour
         {
             hit.transform.GetComponent<Enemy>().HitByGrenade(transform.position);
         }
+        explodeSound.Play();
+        // AudioSource.PlayClipAtPoint(explodeSound, transform.position);
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
