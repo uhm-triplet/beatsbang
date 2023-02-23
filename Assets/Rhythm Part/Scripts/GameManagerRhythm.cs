@@ -4,55 +4,39 @@ using UnityEngine;
 
 public class GameManagerRhythm : MonoBehaviour
 {
-    int multiplier = 1;
-    int streak = 0;
+    public int score;
+    public int multiplier = 1;
+    public int streak = 0;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void AddStreak()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter2D(Collider2D col) {
-        Destroy(col.gameObject);
-    }
-
-    public void AddStreak() {
         streak++;
-        if (streak >= 24) {
+        if (streak >= 24)
+        {
             multiplier = 4;
-        } 
-        else if (streak >= 16) {
+        }
+        else if (streak >= 16)
+        {
             multiplier = 3;
         }
-        else if (streak >= 8) {
+        else if (streak >= 8)
+        {
             multiplier = 2;
         }
-        else {
+        else
+        {
             multiplier = 1;
         }
-        UpdateGUI();
     }
 
-    public void ResetStreak() {
+    public void ResetStreak()
+    {
         streak = 0;
         multiplier = 1;
-        UpdateGUI();
     }
 
-    void UpdateGUI() {
-        PlayerPrefs.SetInt("Streak", streak);
-        PlayerPrefs.SetInt("Multiplier", multiplier);
-    }
-
-    public int GetScore() {
-        return 100*multiplier;
+    public int GetScore()
+    {
+        return 100 * multiplier;
     }
 }

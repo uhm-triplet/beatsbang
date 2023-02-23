@@ -7,11 +7,22 @@ using TMPro;
 
 public class PPText : MonoBehaviour
 {
-    public string name;
+    GameManagerRhythm gm;
+    public TextMeshProUGUI score;
+    public TextMeshProUGUI multiplier;
+    public TextMeshProUGUI streak;
+
+    void Awake()
+    {
+        gm = GameObject.Find("GameManagerRhythm").GetComponent<GameManagerRhythm>();
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetInt(name)+"";
+        score.text = gm.score + "";
+        multiplier.text = gm.multiplier + "";
+        streak.text = gm.streak + "";
     }
 }

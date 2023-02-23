@@ -11,51 +11,58 @@ public class Activator : MonoBehaviour
     GameObject note, gm;
     Color original;
 
-    public bool createMode;
-    public GameObject createNote;
+    // public bool createMode;
+    // public GameObject createNote;
 
+    SongManager sm;
 
-    void Awake() {
+    void Awake()
+    {
         sr = GetComponent<SpriteRenderer>();
+        sm = GameObject.Find("SongManager").GetComponent<SongManager>();
     }
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         gm = GameObject.Find("GameManagerRhythm");
         original = sr.color;
     }
 
     // Update is called once per frame
-    void Update() {
-        if (createMode) {
-            if (Input.GetKeyDown(key)) {
-                Instantiate(createNote, transform.position, Quaternion.identity);
-            }
+    void Update()
+    {
+        // if (createMode)
+        // {
+        //     if (Input.GetKeyDown(key))
+        //     {
+        //         Instantiate(createNote, transform.position, Quaternion.identity);
+        //     }
+        // }
+
+        if (Input.GetKeyDown(key))
+        {
+            StartCoroutine(Clicked());
         }
 
-        else {
-            if (Input.GetKeyDown(key)) {
-                StartCoroutine(Clicked());
-            }
-
-            if (Input.GetKeyDown(key) && active)
-            {
-                Destroy(note.gameObject);
-                gm.GetComponent<GameManagerRhythm>().AddStreak();
-                AddScore();
-                active = false;
-            } 
-            
-            else if (Input.GetKeyDown(key) &&! active) {
-                gm.GetComponent<GameManagerRhythm>().ResetStreak();
-            }
+        if (Input.GetKeyDown(key) && active)
+        {
+            Destroy(note.gameObject);
+            gm.GetComponent<GameManagerRhythm>().AddStreak();
+            AddScore();
+            active = false;
         }
+
+        else if (Input.GetKeyDown(key) && !active)
+        {
+            gm.GetComponent<GameManagerRhythm>().ResetStreak();
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         active = true;
-        Debug.Log("touched");
         if (other.gameObject.tag == "Note")
         {
             note = other.gameObject;
@@ -63,18 +70,26 @@ public class Activator : MonoBehaviour
 
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    public void OnFail()
     {
         active = false;
         gm.GetComponent<GameManagerRhythm>().ResetStreak();
     }
 
-    void AddScore() {
-        PlayerPrefs.SetInt("Score",PlayerPrefs.GetInt("Score")+gm.GetComponent<GameManagerRhythm>().GetScore());
-        Debug.Log(PlayerPrefs.GetInt("Score"));
+    // void OnTriggerExit2D(Collider2D other)
+    // {
+    //     active = false;
+    //     gm.GetComponent<GameManagerRhythm>().ResetStreak();
+    // }
+
+    void AddScore()
+    {
+        // PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManagerRhythm>().GetScore());
+        gm.GetComponent<GameManagerRhythm>().score += gm.GetComponent<GameManagerRhythm>().GetScore();
     }
 
-    IEnumerator Clicked() {
+    IEnumerator Clicked()
+    {
         Color original = sr.color;
         sr.color = new Color(0, 0, 0);
         yield return new WaitForSeconds(0.1f);
