@@ -26,7 +26,7 @@ namespace Game
 
         public void StartSingleplay()
         {
-            SceneManager.LoadScene("SingleGame");
+            SceneManager.LoadScene("SingleStageSelect");
             buttonClickSound.Play();
         }
         public void ExitGame()

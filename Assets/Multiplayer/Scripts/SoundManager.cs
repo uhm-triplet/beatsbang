@@ -33,8 +33,8 @@ public class SoundManager : MonoBehaviour
 
             soundEffectsFloat = PlayerPrefs.GetFloat(SoundEffectsPref);
             soundEffectsSlider.value = soundEffectsFloat;
-
         }
+        UpdateSound();
 
     }
 

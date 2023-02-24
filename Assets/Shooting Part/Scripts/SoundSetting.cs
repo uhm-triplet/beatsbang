@@ -14,7 +14,7 @@ public class SoundSetting : MonoBehaviour
         ContinueSettings();
     }
 
-    private void ContinueSettings()
+    public void ContinueSettings()
     {
         backgroundFloat = PlayerPrefs.GetFloat(BackgroundPref);
         soundEffectsFloat = PlayerPrefs.GetFloat(SoundEffectsPref);

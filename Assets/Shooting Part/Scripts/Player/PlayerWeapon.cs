@@ -20,11 +20,13 @@ public class PlayerWeapon : MonoBehaviour
     PlayerState playerState;
     PlayerMove playerMove;
     PlayerAim playerAim;
+    OptionHandler optionHandler;
 
 
     private AudioSource shootSound;
     private AudioSource swingSound;
     private AudioSource reloadSound;
+
 
     void GetInput()
     {
@@ -39,6 +41,8 @@ public class PlayerWeapon : MonoBehaviour
         shootSound = GameObject.Find("SFX/Player/Shoot").GetComponent<AudioSource>();
         swingSound = GameObject.Find("SFX/Player/Swing").GetComponent<AudioSource>();
         reloadSound = GameObject.Find("SFX/Player/Reload").GetComponent<AudioSource>();
+        optionHandler = GameObject.Find("OptionHandler").GetComponent<OptionHandler>();
+
         playerMove = GetComponentInParent<PlayerMove>();
         playerState = GetComponentInParent<PlayerState>();
         playerAim = GetComponentInParent<PlayerAim>();
@@ -48,6 +52,7 @@ public class PlayerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (optionHandler.isOptionOn) return;
         GetInput();
         Attack();
         Grenade();
