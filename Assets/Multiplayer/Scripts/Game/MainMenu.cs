@@ -26,25 +26,25 @@ namespace Game
 
         public void StartSingleplay()
         {
-            SceneManager.LoadScene("SingleStageSelect");
             buttonClickSound.Play();
+            SceneManager.LoadScene("SingleStageSelect");
         }
         public void ExitGame()
         {
-            Application.Quit();
             buttonClickSound.Play();
+            Application.Quit();
         }
 
         public void OpenOption()
         {
-            optionPanel.SetActive(true);
             buttonClickSound.Play();
+            optionPanel.SetActive(true);
         }
 
         public void CloseOption()
         {
-            optionPanel.SetActive(false);
             buttonClickSound.Play();
+            optionPanel.SetActive(false);
         }
 
         public void optionTestButtonClick()
@@ -53,9 +53,9 @@ namespace Game
         }
         public void StartMultiplay()
         {
+            buttonClickSound.Play();
             hostButton.gameObject.SetActive(true);
             joinButton.gameObject.SetActive(true);
-            buttonClickSound.Play();
             // SceneManager.LoadScene("Lobby");
 
         }

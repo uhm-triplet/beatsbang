@@ -43,8 +43,8 @@ public class StageSelect : MonoBehaviour
 
     public void ReturnMainMenu()
     {
-        SceneManager.LoadScene("Main");
         buttonClickSound.Play();
+        SceneManager.LoadScene("Main");
     }
 
     private void HideIfClickedOutside(GameObject panel)
@@ -87,7 +87,12 @@ public class StageSelect : MonoBehaviour
             default:
                 break;
         }
+    }
 
+    public void StageStart(int stage)
+    {
+        buttonClickSound.Play();
+        SceneManager.LoadScene($"Stage{stage}");
     }
     // Update is called once per frame
     void Update()

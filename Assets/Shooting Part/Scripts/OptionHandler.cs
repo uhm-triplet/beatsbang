@@ -54,6 +54,7 @@ public class OptionHandler : MonoBehaviour
     {
         optionPanel.SetActive(false);
         buttonClickSound.Play();
+        isOptionOn = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
