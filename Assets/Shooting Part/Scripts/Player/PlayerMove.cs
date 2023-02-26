@@ -25,11 +25,19 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rigid;
 
     PlayerWeapon playerWeapon;
-
+    private AudioSource walkSound;
+    private AudioSource runSound;
+    private AudioSource jumpSound;
+    private AudioSource landSound;
 
     // Start is called before the first frame update
     void Awake()
     {
+        walkSound = GameObject.Find("SFX/Player/Walk").GetComponent<AudioSource>();
+        runSound = GameObject.Find("SFX/Player/Run").GetComponent<AudioSource>();
+        jumpSound = GameObject.Find("SFX/Player/Jump").GetComponent<AudioSource>();
+        landSound = GameObject.Find("SFX/Player/Land").GetComponent<AudioSource>();
+
         playerWeapon = GetComponentInParent<PlayerWeapon>();
         controller = GetComponent<CharacterController>();
         rigid = GetComponent<Rigidbody>();
@@ -67,12 +75,33 @@ public class PlayerMove : MonoBehaviour
             moveVec = dodgeVec;
         if (runDown && !playerWeapon.isReloading)
             controller.Move(moveVec * speed * Time.deltaTime);
+
         else
             controller.Move(moveVec * speed * 0.6f * Time.deltaTime);
-        // transform.position += moveVec * speed * 0.6f * Time.deltaTime;
 
         animator.SetBool("isWalk", moveVec != Vector3.zero);
         animator.SetBool("isRun", runDown && !playerWeapon.isReloading);
+        if ((hAxis != 0 || vAxis != 0) && !isJump)
+        {
+            if (runDown && !runSound.isPlaying)
+            {
+                runSound.Play();
+                walkSound.Stop();
+            }
+            else if (!runDown && !walkSound.isPlaying)
+            {
+                walkSound.Play();
+                runSound.Stop();
+            }
+        }
+        else
+        {
+            runSound.Stop();
+            walkSound.Stop();
+        }
+
+        // transform.position += moveVec * speed * 0.6f * Time.deltaTime;
+
     }
 
     bool isGrounded()
@@ -88,7 +117,7 @@ public class PlayerMove : MonoBehaviour
     void Gravity()
     {
         if (!isGrounded()) velocity.y += gravity * Time.deltaTime;
-        else if (velocity.y < 0) velocity.y = -2;
+        else if (velocity.y < 0) velocity.y = 0;
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -101,6 +130,8 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isJump", true);
             animator.SetTrigger("doJump");
             isJump = true;
+            jumpSound.Play();
+
         }
     }
 
@@ -110,6 +141,7 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetBool("isJump", false);
             isJump = false;
+            landSound.Play();
         }
     }
     void dodge()
