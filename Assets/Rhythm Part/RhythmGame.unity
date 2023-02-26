@@ -973,15 +973,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1392,7 +1392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1273643718
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1404,7 +1404,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ee6534afe9b5f4831976623f2efde41a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1786,7 +1786,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ca082a621ad7ef64691733fb3482316c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1267d020c1733ec46a5b03232977d35d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2049,15 +2049,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8479586548343320289, guid: 5e96f78aa3f90a9428752e83999ec35c, type: 3}
       propertyPath: m_LocalPosition.x
