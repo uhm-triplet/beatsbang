@@ -60,5 +60,6 @@ public class SoundManager : MonoBehaviour
         {
             soundEffectsAudio[i].volume = soundEffectsSlider.value;
         }
+
     }
 }

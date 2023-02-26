@@ -12,14 +12,22 @@ public class OptionHandler : MonoBehaviour
     // [SerializeField] private Button optionButton;
     [SerializeField] private Button closeOptionButton;
     [SerializeField] private Button retryStageButton;
-    [SerializeField] private Button retryStageSelectButton;
-    [SerializeField] private Button retryMainButton;
+    [SerializeField] private Button returnStageSelectButton;
+    [SerializeField] private Button returnMainButton;
 
     public AudioSource buttonClickSound;
     public AudioSource testButtonClickSound;
 
     public bool isOptionOn = false;
 
+    public SoundManager soundManager;
+
+    void Awake()
+    {
+        retryStageButton.onClick.AddListener(RetryStage);
+        returnStageSelectButton.onClick.AddListener(ReturnStageSelect);
+        returnMainButton.onClick.AddListener(ReturnMain);
+    }
     void Update()
     {
         ToggleOption();
@@ -37,6 +45,7 @@ public class OptionHandler : MonoBehaviour
             else if (isOptionOn)
             {
                 isOptionOn = false;
+                soundManager.SaveSoundSettings();
                 CloseOption();
             }
         }
@@ -54,6 +63,7 @@ public class OptionHandler : MonoBehaviour
     {
         optionPanel.SetActive(false);
         buttonClickSound.Play();
+        soundManager.SaveSoundSettings();
         isOptionOn = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -62,6 +72,24 @@ public class OptionHandler : MonoBehaviour
     public void optionTestButtonClick()
     {
         testButtonClickSound.Play();
+    }
+
+    public void RetryStage()
+    {
+        buttonClickSound.Play();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ReturnStageSelect()
+    {
+        buttonClickSound.Play();
+        SceneManager.LoadScene("SingleStageSelect");
+    }
+
+    public void ReturnMain()
+    {
+        buttonClickSound.Play();
+        SceneManager.LoadScene("Main");
     }
 
 }
