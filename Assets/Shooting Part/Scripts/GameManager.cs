@@ -7,15 +7,16 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public PlayerState playerState;
-    public Enemy bossA;
-    public Enemy bossB;
-    public Enemy bossC;
-    public Boss bossD;
+    // public Enemy bossA;
+    // public Enemy bossB;
+    // public Enemy bossC;
+    public Boss boss;
     public float playTime = 754f;
     public int stage = 0;
     public int enemyACnt = 0;
     public int enemyBCnt = 0;
     public int enemyCCnt = 0;
+    public int enemyDCnt = 0;
 
     public GameObject gamePanel;
 
@@ -39,16 +40,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI weaponAmmoTxt;
     public TextMeshProUGUI grenadeCountTxt;
 
-
-    public Image bossAImg;
-    public Image bossBImg;
-    public Image bossCImg;
-    public Image bossDImg;
+    public Image bossImg;
     public RectTransform bossHealthGroup;
     public RectTransform bossHealthBar;
 
-    public Transform playerPosition;
-    public CharacterController controller;
+    public Transform[] enemyZones;
+    public GameObject[] enemies;
+    public List<int> enemyList;
+
+    public GameObject gameOverUI;
+    public GameObject stageClearUI;
 
     void Awake()
     {
@@ -56,46 +57,115 @@ public class GameManager : MonoBehaviour
         hammerImg.color = new Color(1, 1, 1, 0);
         handGunImg.color = new Color(1, 1, 1, 0);
         subMachineGunImg.color = new Color(1, 1, 1, 0);
-        bossAImg.color = new Color(1, 1, 1, 0);
-        bossBImg.color = new Color(1, 1, 1, 0);
-        bossCImg.color = new Color(1, 1, 1, 0);
-        bossDImg.color = new Color(1, 1, 1, 0);
+        // bossAImg.color = new Color(1, 1, 1, 0);
+        // bossBImg.color = new Color(1, 1, 1, 0);
+        // bossCImg.color = new Color(1, 1, 1, 0);
+        enemyList = new List<int>();
+
+        StartCoroutine(SpawnEnemy());
+
     }
     void Update()
     {
-        playTime -= Time.deltaTime;
-
-    }
-
-    public void NextStage()
-    {
-        stage++;
-        switch (stage)
+        if (playTime > 0)
         {
-            case 1:
-                controller.enabled = false;
-                playerPosition.position = new Vector3(141, 1, 76);
-                controller.enabled = true;
-                break;
-            case 2:
-                controller.enabled = false;
-                playerPosition.position = new Vector3(335, 1, 268);
-                controller.enabled = true;
-                break;
-            case 3:
-                controller.enabled = false;
-                playerPosition.position = new Vector3(565, 1, 500);
-                controller.enabled = true;
-                break;
-            case 4:
-                controller.enabled = false;
-                playerPosition.position = new Vector3(792, 1, 724);
-                controller.enabled = true;
-                break;
+            playTime -= Time.deltaTime;
+        }
+        else
+        {
+            playTime = 0;
         }
     }
 
+    IEnumerator SpawnEnemy()
+    {
 
+        for (int i = 0; i < 40; i++)
+        {
+            if (stage == 1)
+            {
+                enemyList.Add(0);
+                enemyACnt++;
+            }
+            else if (stage == 2)
+            {
+                int ran = Random.Range(0, 2);
+                enemyList.Add(ran);
+                switch (ran)
+                {
+                    case 0:
+                        enemyACnt++;
+                        break;
+                    case 1:
+                        enemyBCnt++;
+                        break;
+                }
+            }
+            else if (stage == 3)
+            {
+                int ran = Random.Range(0, 3);
+                enemyList.Add(ran);
+                switch (ran)
+                {
+                    case 0:
+                        enemyACnt++;
+                        break;
+                    case 1:
+                        enemyBCnt++;
+                        break;
+                    case 2:
+                        enemyCCnt++;
+                        break;
+                }
+            }
+        }
+
+        if (stage == 4)
+        {
+            enemyDCnt++;
+            GameObject instantEnemy = Instantiate(enemies[3], enemyZones[0].position, enemyZones[0].rotation);
+            Enemy enemy = instantEnemy.GetComponent<Enemy>();
+            enemy.target = playerState.transform;
+            enemy.gameManager = this;
+            boss = instantEnemy.GetComponent<Boss>();
+        }
+
+        while (enemyList.Count > 0)
+        {
+            int ranZone = Random.Range(0, 4);
+            GameObject instantEnemy = Instantiate(enemies[enemyList[0]], enemyZones[ranZone].position, enemyZones[ranZone].rotation);
+            Enemy enemy = instantEnemy.GetComponent<Enemy>();
+            enemy.target = playerState.transform;
+            enemy.gameManager = this;
+            enemyList.RemoveAt(0);
+            yield return new WaitForSeconds(2f);
+        }
+
+        while (playTime > 0 || (enemyACnt + enemyBCnt + enemyCCnt + enemyDCnt > 0))
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+        StageEnd();
+
+    }
+
+    void StageEnd()
+    {
+        Debug.Log("Stage Clear");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        stageClearUI.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        gameOverUI.SetActive(true);
+    }
     // Update is called once per frame
     void LateUpdate()
     {
@@ -112,8 +182,6 @@ public class GameManager : MonoBehaviour
         EnemyBTxt.text = enemyBCnt.ToString();
         EnemyCTxt.text = enemyCCnt.ToString();
 
-        // killTxt.text = playerState.kill.ToString();
-        // deathTxt.text = playerState.death.ToString();
         grenadeCountTxt.text = playerState.hasGrenades + " / " + playerState.maxHasGrenades;
 
         if (playerState.hasWeapon == 0)
@@ -139,37 +207,39 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (stage == 1)
+        // if (stage == 1)
+        // {
+        //     bossHealthBar.localScale = new Vector3((float)bossA.currentHealth / bossA.maxHealth, 1, 1);
+        //     bossAImg.color = new Color(1, 1, 1, 1);
+        //     bossBImg.color = new Color(1, 1, 1, 0);
+        //     bossCImg.color = new Color(1, 1, 1, 0);
+        //     bossDImg.color = new Color(1, 1, 1, 0);
+        // }
+        // else if (stage == 2)
+        // {
+        //     bossHealthBar.localScale = new Vector3((float)bossB.currentHealth / bossB.maxHealth, 1, 1);
+        //     bossAImg.color = new Color(1, 1, 1, 0);
+        //     bossBImg.color = new Color(1, 1, 1, 1);
+        //     bossCImg.color = new Color(1, 1, 1, 0);
+        //     bossDImg.color = new Color(1, 1, 1, 0);
+        // }
+        // else if (stage == 3)
+        // {
+        //     bossHealthBar.localScale = new Vector3((float)bossC.currentHealth / bossC.maxHealth, 1, 1);
+        //     bossAImg.color = new Color(1, 1, 1, 0);
+        //     bossBImg.color = new Color(1, 1, 1, 0);
+        //     bossCImg.color = new Color(1, 1, 1, 1);
+        //     bossDImg.color = new Color(1, 1, 1, 0);
+        // }
+        if (stage == 4)
         {
-            bossHealthBar.localScale = new Vector3((float)bossA.currentHealth / bossA.maxHealth, 1, 1);
-            bossAImg.color = new Color(1, 1, 1, 1);
-            bossBImg.color = new Color(1, 1, 1, 0);
-            bossCImg.color = new Color(1, 1, 1, 0);
-            bossDImg.color = new Color(1, 1, 1, 0);
+            // bossImg.color = new Color(1, 1, 1, 1);
+            bossHealthGroup.anchoredPosition = Vector3.down * 67;
+            bossHealthBar.localScale = new Vector3((float)boss.currentHealth / boss.maxHealth, 1, 1);
         }
-        else if (stage == 2)
+        else
         {
-            bossHealthBar.localScale = new Vector3((float)bossB.currentHealth / bossB.maxHealth, 1, 1);
-            bossAImg.color = new Color(1, 1, 1, 0);
-            bossBImg.color = new Color(1, 1, 1, 1);
-            bossCImg.color = new Color(1, 1, 1, 0);
-            bossDImg.color = new Color(1, 1, 1, 0);
-        }
-        else if (stage == 3)
-        {
-            bossHealthBar.localScale = new Vector3((float)bossC.currentHealth / bossC.maxHealth, 1, 1);
-            bossAImg.color = new Color(1, 1, 1, 0);
-            bossBImg.color = new Color(1, 1, 1, 0);
-            bossCImg.color = new Color(1, 1, 1, 1);
-            bossDImg.color = new Color(1, 1, 1, 0);
-        }
-        else if (stage == 4)
-        {
-            bossHealthBar.localScale = new Vector3((float)bossD.currentHealth / bossD.maxHealth, 1, 1);
-            bossAImg.color = new Color(1, 1, 1, 0);
-            bossBImg.color = new Color(1, 1, 1, 0);
-            bossCImg.color = new Color(1, 1, 1, 0);
-            bossDImg.color = new Color(1, 1, 1, 1);
+            bossHealthGroup.anchoredPosition = Vector3.up * 200;
         }
 
     }

@@ -19,6 +19,7 @@ public class PlayerState : MonoBehaviour
     public int score;
 
     bool isDamage;
+    public bool isDead = false;
 
     GameObject nearObject;
     public Weapon equipWeapon;
@@ -29,6 +30,8 @@ public class PlayerState : MonoBehaviour
 
     Vector3 impact = Vector3.zero;
     private CharacterController controller;
+
+    public GameManager gameManager;
 
 
     bool oneDown;
@@ -128,11 +131,23 @@ public class PlayerState : MonoBehaviour
         }
 
     }
+
+    void OnDie()
+    {
+        if (isDead) return;
+        isDead = true;
+        gameManager.GameOver();
+        animator.SetTrigger("doDie");
+    }
+
     IEnumerator OnDamage(bool isBossAttack)
     {
         isDamage = true;
         hitSound.Play();
-
+        if (health <= 0)
+        {
+            OnDie();
+        }
         foreach (MeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.yellow;
@@ -152,6 +167,8 @@ public class PlayerState : MonoBehaviour
         {
             mesh.material.color = Color.white;
         }
+
+
 
     }
 

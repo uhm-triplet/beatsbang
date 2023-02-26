@@ -56,13 +56,13 @@ public class PlayerWeapon : MonoBehaviour
         GetInput();
         Attack();
         Grenade();
-        Reload();
+        // Reload();
     }
 
 
     void Attack()
     {
-        if (playerState.equipWeapon == null || playerState.equipWeapon.curAmmo == 0) return;
+        if (playerState.equipWeapon == null || playerState.ammo <= 0) return;
 
         fireDelay += Time.deltaTime;
         isFireReady = playerState.equipWeapon.rate < fireDelay;
@@ -105,29 +105,29 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    void Reload()
-    {
-        if (playerState.equipWeapon == null) return;
-        if (playerState.equipWeapon.type == Weapon.Type.Melee) return;
-        if (playerState.ammo == 0) return;
-        if (rDown && isFireReady && !isReloading)
-        {
-            animator.SetTrigger("doReload");
-            isReloading = true;
-            reloadSound.Play();
-            Invoke("ReloadOut", 3f);
-        }
-    }
+    // void Reload()
+    // {
+    //     if (playerState.equipWeapon == null) return;
+    //     if (playerState.equipWeapon.type == Weapon.Type.Melee) return;
+    //     if (playerState.ammo == 0) return;
+    //     if (rDown && isFireReady && !isReloading)
+    //     {
+    //         animator.SetTrigger("doReload");
+    //         isReloading = true;
+    //         reloadSound.Play();
+    //         Invoke("ReloadOut", 3f);
+    //     }
+    // }
 
-    void ReloadOut()
-    {
+    // void ReloadOut()
+    // {
 
 
-        int requiredAmmo = playerState.equipWeapon.maxAmmo - playerState.equipWeapon.curAmmo;
-        int reAmmo = playerState.ammo < requiredAmmo ? playerState.ammo : requiredAmmo;
-        playerState.equipWeapon.curAmmo += reAmmo;
-        playerState.ammo -= reAmmo;
-        isReloading = false;
-        // 장전 갯수 로직 정확하게 바꾸기
-    }
+    //     int requiredAmmo = playerState.equipWeapon.maxAmmo - playerState.equipWeapon.curAmmo;
+    //     int reAmmo = playerState.ammo < requiredAmmo ? playerState.ammo : requiredAmmo;
+    //     playerState.equipWeapon.curAmmo += reAmmo;
+    //     playerState.ammo -= reAmmo;
+    //     isReloading = false;
+    //     // 장전 갯수 로직 정확하게 바꾸기
+    // }
 }

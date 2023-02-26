@@ -18,8 +18,12 @@ public class PlayerAim : MonoBehaviour
     [HideInInspector] public Vector3 aimPos;
     [SerializeField] float aimSmoothSpeed = 50;
     [SerializeField] LayerMask aimMask;
+    PlayerState playerState;
 
-
+    void Awake()
+    {
+        playerState = GetComponentInParent<PlayerState>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,7 @@ public class PlayerAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerState.isDead) return;
         xAxis.Update(Time.deltaTime);
         yAxis.Update(Time.deltaTime);
 

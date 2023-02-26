@@ -21,10 +21,12 @@ public class Weapon : MonoBehaviour
     public GameObject bulletCase;
 
     PlayerAim playerAim;
+    PlayerState playerState;
 
     void Start()
     {
         playerAim = GetComponentInParent<PlayerAim>();
+        playerState = GetComponentInParent<PlayerState>();
     }
 
 
@@ -36,9 +38,9 @@ public class Weapon : MonoBehaviour
             StopCoroutine("Swing");
             StartCoroutine("Swing");
         }
-        else if (type == Type.Range && curAmmo > 0)
+        else if (type == Type.Range && playerState.ammo > 0)
         {
-            curAmmo--;
+            playerState.ammo--;
             StartCoroutine("Shot");
         }
 
@@ -66,11 +68,11 @@ public class Weapon : MonoBehaviour
         bulletRigid.AddForce(bulletPos.forward * bulletVelocity, ForceMode.Impulse);
 
         yield return null;
-        GameObject instantBulletCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);
-        Rigidbody bulletCaseRigid = instantBulletCase.GetComponent<Rigidbody>();
-        Vector3 caseVec = bulletCasePos.forward * Random.Range(-4, -3) + Vector3.up * Random.Range(2, 3);
-        bulletCaseRigid.AddForce(caseVec, ForceMode.Impulse);
-        bulletCaseRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
+        // GameObject instantBulletCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);
+        // Rigidbody bulletCaseRigid = instantBulletCase.GetComponent<Rigidbody>();
+        // Vector3 caseVec = bulletCasePos.forward * Random.Range(-4, -3) + Vector3.up * Random.Range(2, 3);
+        // bulletCaseRigid.AddForce(caseVec, ForceMode.Impulse);
+        // bulletCaseRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
 
 
     }
