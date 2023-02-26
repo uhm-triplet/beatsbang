@@ -8,7 +8,7 @@ public class Activator : MonoBehaviour
     SpriteRenderer sr;
     public KeyCode key;
     bool active = false;
-    bool holding = false;
+    bool barActive = false;
     GameObject note, gm;
     GameObject holdBar;
     Color original;
@@ -36,7 +36,6 @@ public class Activator : MonoBehaviour
     {
         ActivatorClick();
         SingleNote();
-        HoldNote();
     }
 
     void ActivatorClick()
@@ -45,13 +44,13 @@ public class Activator : MonoBehaviour
         {
             Color original = sr.color;
             sr.color = new Color(0, 0, 0);
-            holding = true;
+            // holding = true;
 
         }
         if (Input.GetKeyUp(key))
         {
             sr.color = original;
-            holding = false;
+            // holding = false;
         }
     }
     void SingleNote()
@@ -70,41 +69,13 @@ public class Activator : MonoBehaviour
         }
     }
 
-    void HoldNote()
-    {
-        if (Input.GetKey(key) && active)
-        {
-            Destroy(note.gameObject);
-            if (!holding)
-            {
-                StartCoroutine(HoldScore());
-            }
-        }
-        else if (Input.GetKeyDown(key) && !active)
-        {
-            gm.GetComponent<GameManagerRhythm>().ResetStreak();
-        }
-    }
-    IEnumerator HoldScore()
-    {
-        gm.GetComponent<GameManagerRhythm>().AddStreak();
-        AddScore();
-        yield return new WaitForSeconds(0.2f);
-        StartCoroutine(HoldScore());
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        active = true;
         if (other.gameObject.tag == "Note")
         {
+            active = true;
             note = other.gameObject;
         }
-        if (other.gameObject.tag == "HoldBar")
-        {
-            holdBar = other.gameObject;
-        }
-
     }
 
     public void OnFail()
