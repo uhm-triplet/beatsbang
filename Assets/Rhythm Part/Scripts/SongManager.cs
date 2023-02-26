@@ -59,13 +59,18 @@ public class SongManager : MonoBehaviour
                             33.50f, 34.00f, 34.20f,
 
 
-
-
     };
+
+    float[] holdNotesLeft = { 2.85f, 4.05f, 8.85f, 12.85f };
+    float[] holdNotesRight = { };
+
 
     //the index of the next note to be spawned
     int nextIndexLeft = 0;
     int nextIndexRight = 0;
+
+    int holdNextIndexLeft = 0;
+    int holdNextIndexRight = 0;
 
     Vector2 spawnPosLeft = new Vector2(0, 40);
     Vector2 spawnPosRight = new Vector2(5, 40);
@@ -75,6 +80,7 @@ public class SongManager : MonoBehaviour
     Vector2 removePosRight = new Vector2(5, -20);
     //the number of beats in each loop
     [SerializeField] GameObject note;
+    [SerializeField] GameObject holdNote;
 
     void Start()
     {
@@ -88,7 +94,13 @@ public class SongManager : MonoBehaviour
     {
         //calculate the position in seconds
         songPosition = (float)(AudioSettings.dspTime - dsptimesong);
+        SingleNote(songPosition);
+        // HoldingNote(songPosition);
 
+    }
+
+    void SingleNote(float songPosition)
+    {
         if (nextIndexLeft < notesLeft.Length && (notesLeft[nextIndexLeft] - timeBeforeHit) < songPosition)
         {
             Note n = Instantiate(note, spawnPosLeft, Quaternion.identity).GetComponent<Note>();
@@ -115,6 +127,42 @@ public class SongManager : MonoBehaviour
             n.SpawnTime = songPosition;
             n.type = Note.Type.Right;
             nextIndexRight++;
+        }
+    }
+
+    void HoldingNote(float songPosition)
+    {
+        if (holdNextIndexLeft < holdNotesLeft.Length && (holdNotesLeft[holdNextIndexLeft] - timeBeforeHit) < songPosition)
+        {
+            HoldNote n = Instantiate(holdNote, spawnPosLeft, Quaternion.identity).GetComponent<HoldNote>();
+            //initialize the fields of the music note
+            n.SpawnPos = spawnPosLeft;
+            n.HitPos = hitPosLeft;
+            n.RemovePos = removePosLeft;
+            n.TimeBeforeHit = timeBeforeHit;
+            n.SpawnTime = songPosition;
+            n.type = HoldNote.Type.Left;
+
+            n.hitTime = holdNotesLeft[holdNextIndexLeft];
+            n.releaseTime = holdNotesLeft[holdNextIndexLeft + 1];
+
+            holdNextIndexLeft += 2;
+        }
+
+        if (holdNextIndexRight < holdNotesRight.Length && (holdNotesRight[holdNextIndexRight] - timeBeforeHit) < songPosition)
+        {
+            HoldNote n = Instantiate(holdNote, spawnPosRight, Quaternion.identity).GetComponent<HoldNote>();
+            //initialize the fields of the music note
+            n.SpawnPos = spawnPosRight;
+            n.HitPos = hitPosRight;
+            n.RemovePos = removePosRight;
+            n.TimeBeforeHit = timeBeforeHit;
+            n.SpawnTime = songPosition;
+            n.type = HoldNote.Type.Right;
+
+            n.releaseTime = holdNotesRight[holdNextIndexRight + 1];
+
+            holdNextIndexRight += 2;
         }
     }
 }

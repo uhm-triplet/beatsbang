@@ -8,7 +8,9 @@ public class Activator : MonoBehaviour
     SpriteRenderer sr;
     public KeyCode key;
     bool active = false;
+    bool holding = false;
     GameObject note, gm;
+    GameObject holdBar;
     Color original;
 
     // public bool createMode;
@@ -32,19 +34,28 @@ public class Activator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (createMode)
-        // {
-        //     if (Input.GetKeyDown(key))
-        //     {
-        //         Instantiate(createNote, transform.position, Quaternion.identity);
-        //     }
-        // }
+        ActivatorClick();
+        SingleNote();
+        HoldNote();
+    }
 
-        if (Input.GetKeyDown(key))
+    void ActivatorClick()
+    {
+        if (Input.GetKey(key))
         {
-            StartCoroutine(Clicked());
-        }
+            Color original = sr.color;
+            sr.color = new Color(0, 0, 0);
+            holding = true;
 
+        }
+        if (Input.GetKeyUp(key))
+        {
+            sr.color = original;
+            holding = false;
+        }
+    }
+    void SingleNote()
+    {
         if (Input.GetKeyDown(key) && active)
         {
             Destroy(note.gameObject);
@@ -57,7 +68,29 @@ public class Activator : MonoBehaviour
         {
             gm.GetComponent<GameManagerRhythm>().ResetStreak();
         }
+    }
 
+    void HoldNote()
+    {
+        if (Input.GetKey(key) && active)
+        {
+            Destroy(note.gameObject);
+            if (!holding)
+            {
+                StartCoroutine(HoldScore());
+            }
+        }
+        else if (Input.GetKeyDown(key) && !active)
+        {
+            gm.GetComponent<GameManagerRhythm>().ResetStreak();
+        }
+    }
+    IEnumerator HoldScore()
+    {
+        gm.GetComponent<GameManagerRhythm>().AddStreak();
+        AddScore();
+        yield return new WaitForSeconds(0.2f);
+        StartCoroutine(HoldScore());
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -66,6 +99,10 @@ public class Activator : MonoBehaviour
         if (other.gameObject.tag == "Note")
         {
             note = other.gameObject;
+        }
+        if (other.gameObject.tag == "HoldBar")
+        {
+            holdBar = other.gameObject;
         }
 
     }
@@ -88,11 +125,11 @@ public class Activator : MonoBehaviour
         gm.GetComponent<GameManagerRhythm>().score += gm.GetComponent<GameManagerRhythm>().GetScore();
     }
 
-    IEnumerator Clicked()
-    {
-        Color original = sr.color;
-        sr.color = new Color(0, 0, 0);
-        yield return new WaitForSeconds(0.1f);
-        sr.color = original;
-    }
+    // IEnumerator Clicked()
+    // {
+    //     Color original = sr.color;
+    //     sr.color = new Color(0, 0, 0);
+    //     yield return new WaitForSeconds(0.1f);
+    //     sr.color = original;
+    // }
 }

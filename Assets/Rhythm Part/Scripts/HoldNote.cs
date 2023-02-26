@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour
+public class HoldNote : MonoBehaviour
 {
     public enum Type
     {
         Left,
         Right
     }
+    [SerializeField] GameObject holdNoteBottom;
+    [SerializeField] GameObject holdNoteTop;
+    [SerializeField] GameObject holdNoteBar;
+
     [HideInInspector] public Type type;
     public float speed;
+    public float hitTime;
+    public float releaseTime;
     [HideInInspector] public Vector2 SpawnPos;
     [HideInInspector] public Vector2 HitPos;
     [HideInInspector] public Vector2 RemovePos;
@@ -19,21 +25,26 @@ public class Note : MonoBehaviour
     Activator activatorL;
     Activator activatorR;
 
-
-
     void Awake()
     {
         activatorL = GameObject.Find("Activators/Activator1").GetComponent<Activator>();
         activatorR = GameObject.Find("Activators/Activator2").GetComponent<Activator>();
     }
-
-    // Start is called before the first frame update
     void Start()
     {
         speed = Vector2.Distance(SpawnPos, HitPos) / TimeBeforeHit;
+        SetShape();
     }
 
-    // Update is called once per frame
+    void SetShape()
+    {
+        float size = speed * (releaseTime - hitTime);
+        holdNoteBottom.transform.position = new Vector3(SpawnPos.x, SpawnPos.y, 0);
+        holdNoteTop.transform.position = new Vector3(SpawnPos.x, SpawnPos.y + size, 0);
+        holdNoteBar.transform.position = new Vector3(SpawnPos.x, SpawnPos.y + size / 2, 0);
+        holdNoteBar.transform.localScale = new Vector3(1, size, 1);
+    }
+
     void FixedUpdate()
     {
         transform.position = Vector2.MoveTowards(transform.position, RemovePos, speed * Time.deltaTime);
