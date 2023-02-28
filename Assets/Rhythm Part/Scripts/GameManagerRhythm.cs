@@ -8,6 +8,10 @@ public class GameManagerRhythm : MonoBehaviour
     public int multiplier = 1;
     public int streak = 0;
 
+    public int scorePerNote = 100;
+    public int scorePerGoodNote = 125;
+    public int scorePerPerfectNote = 150;
+
     public void AddStreak()
     {
         streak++;
@@ -35,8 +39,24 @@ public class GameManagerRhythm : MonoBehaviour
         multiplier = 1;
     }
 
+    public int NormalHit()
+    {
+        return scorePerNote * multiplier;
+    }
+
+    public int GoodHit()
+    {
+        return scorePerGoodNote * multiplier;
+    }
+
+    public int PerfectHit()
+    {
+        return scorePerPerfectNote * multiplier;
+    }
+
     public int GetScore()
     {
-        return 100 * multiplier;
+        return scorePerNote * multiplier;
     }
+
 }

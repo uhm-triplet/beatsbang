@@ -59,7 +59,27 @@ public class Activator : MonoBehaviour
         {
             Destroy(note.gameObject);
             gm.GetComponent<GameManagerRhythm>().AddStreak();
-            AddScore();
+
+            if (Mathf.Abs(transform.position.y) > 0.25)
+            {
+                AddNormalScore();
+                Debug.Log("Normal Hit");
+            } 
+
+            else if (Mathf.Abs(transform.position.y) > 0.05f)
+            {
+                AddGoodScore();
+                Debug.Log("Good Hit");
+            }
+
+            else {
+                AddPerfectScore();
+                Debug.Log("Perfect Hit");
+            }
+            
+    
+
+            //AddScore();
             active = false;
         }
 
@@ -94,6 +114,24 @@ public class Activator : MonoBehaviour
     {
         // PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManagerRhythm>().GetScore());
         gm.GetComponent<GameManagerRhythm>().score += gm.GetComponent<GameManagerRhythm>().GetScore();
+    }
+
+    void AddNormalScore()
+    {
+        // PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManagerRhythm>().GetScore());
+        gm.GetComponent<GameManagerRhythm>().score += gm.GetComponent<GameManagerRhythm>().NormalHit();
+    }
+
+    void AddGoodScore()
+    {
+        // PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManagerRhythm>().GetScore());
+        gm.GetComponent<GameManagerRhythm>().score += gm.GetComponent<GameManagerRhythm>().GoodHit();
+    }
+
+    void AddPerfectScore()
+    {
+        // PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManagerRhythm>().GetScore());
+        gm.GetComponent<GameManagerRhythm>().score += gm.GetComponent<GameManagerRhythm>().PerfectHit();
     }
 
     // IEnumerator Clicked()
