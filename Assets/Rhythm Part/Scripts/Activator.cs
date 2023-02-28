@@ -60,19 +60,20 @@ public class Activator : MonoBehaviour
             Destroy(note.gameObject);
             gm.GetComponent<GameManagerRhythm>().AddStreak();
 
-            if (Mathf.Abs(transform.position.y) > 0.25)
+            if (Mathf.Abs(note.transform.position.y) > 0.75f)
             {
                 AddNormalScore();
                 Debug.Log("Normal Hit");
             } 
 
-            else if (Mathf.Abs(transform.position.y) > 0.05f)
+            else if (Mathf.Abs(note.transform.position.y) > 0.50f)
             {
                 AddGoodScore();
                 Debug.Log("Good Hit");
             }
 
-            else {
+            else if (note.transform.position.y == 0)
+            {
                 AddPerfectScore();
                 Debug.Log("Perfect Hit");
             }
