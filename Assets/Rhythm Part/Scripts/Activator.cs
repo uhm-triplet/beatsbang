@@ -16,6 +16,9 @@ public class Activator : MonoBehaviour
     // public bool createMode;
     // public GameObject createNote;
 
+    public GameObject normalEffect, goodEffect, perfectEffect, missEffect;
+    
+
     SongManager sm;
 
     void Awake()
@@ -64,18 +67,21 @@ public class Activator : MonoBehaviour
             {
                 AddNormalScore();
                 Debug.Log("Normal Hit");
+                Instantiate(normalEffect, transform.position, normalEffect.transform.rotation);
             } 
 
             else if (Mathf.Abs(note.transform.position.y) > 0.50f)
             {
                 AddGoodScore();
                 Debug.Log("Good Hit");
+                Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
             }
 
             else if (note.transform.position.y == 0)
             {
                 AddPerfectScore();
                 Debug.Log("Perfect Hit");
+                Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
             }
             
     
@@ -103,6 +109,8 @@ public class Activator : MonoBehaviour
     {
         active = false;
         gm.GetComponent<GameManagerRhythm>().ResetStreak();
+
+        Instantiate(missEffect, transform.position, missEffect.transform.rotation);
     }
 
     // void OnTriggerExit2D(Collider2D other)
