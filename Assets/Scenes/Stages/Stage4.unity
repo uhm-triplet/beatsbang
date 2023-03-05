@@ -40696,9 +40696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 1033870674}
-  boss: {fileID: 0}
+  boss: {fileID: 1652938751319693088, guid: 57547dce59fb594479378d7c995b9107, type: 3}
   playTime: 100
-  stage: 1
+  stage: 4
   enemyACnt: 0
   enemyBCnt: 0
   enemyCCnt: 0

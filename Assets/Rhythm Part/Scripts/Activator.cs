@@ -8,6 +8,7 @@ public class Activator : MonoBehaviour
     SpriteRenderer sr;
     public KeyCode key;
     bool active = false;
+    public bool isResetZone = false;
     bool barActive = false;
     GameObject note, gm;
     GameObject holdBar;
@@ -17,7 +18,8 @@ public class Activator : MonoBehaviour
     // public GameObject createNote;
 
     public GameObject normalEffect, goodEffect, perfectEffect, missEffect;
-    
+    public Transform effectZone;
+
 
     SongManager sm;
 
@@ -60,40 +62,51 @@ public class Activator : MonoBehaviour
     {
         if (Input.GetKeyDown(key) && active)
         {
-            Destroy(note.gameObject);
             gm.GetComponent<GameManagerRhythm>().AddStreak();
 
             if (Mathf.Abs(note.transform.position.y) > 0.75f)
             {
                 AddNormalScore();
                 Debug.Log("Normal Hit");
-                Instantiate(normalEffect, transform.position, normalEffect.transform.rotation);
-            } 
+                Instantiate(normalEffect, effectZone.position, normalEffect.transform.rotation);
+            }
 
             else if (Mathf.Abs(note.transform.position.y) > 0.50f)
             {
                 AddGoodScore();
                 Debug.Log("Good Hit");
-                Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
+                Instantiate(goodEffect, effectZone.position, goodEffect.transform.rotation);
             }
 
-            else if (note.transform.position.y == 0)
+            else if (note.transform.position.y >= 0)
             {
                 AddPerfectScore();
                 Debug.Log("Perfect Hit");
-                Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
+                Instantiate(perfectEffect, effectZone.position, perfectEffect.transform.rotation);
             }
-            
-    
+            if (note)
+            {
+                note.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                note.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                Destroy(note.gameObject, 0.1f);
+            }
 
             //AddScore();
             active = false;
         }
-
-        else if (Input.GetKeyDown(key) && !active)
+        else if (Input.GetKeyDown(key) && !active && isResetZone)
         {
-            gm.GetComponent<GameManagerRhythm>().ResetStreak();
+            if (note)
+            {
+                note.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                note.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                Destroy(note.gameObject, 0.1f);
+            }
+
+            OnFail();
         }
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -110,7 +123,7 @@ public class Activator : MonoBehaviour
         active = false;
         gm.GetComponent<GameManagerRhythm>().ResetStreak();
 
-        Instantiate(missEffect, transform.position, missEffect.transform.rotation);
+        Instantiate(missEffect, effectZone.position, missEffect.transform.rotation);
     }
 
     // void OnTriggerExit2D(Collider2D other)

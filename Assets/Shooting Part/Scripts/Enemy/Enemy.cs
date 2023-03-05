@@ -259,18 +259,18 @@ public class Enemy : MonoBehaviour
                 }
                 foreach (MeshRenderer mesh in meshs)
                     mesh.material.color = Color.gray;
-                gameObject.layer = 11;
                 rigid.AddForce(Vector3.up * 2, ForceMode.Impulse);
                 if (enemyType != Type.D)
                     Destroy(gameObject, 1);
             }
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.red;
-
+            yield return new WaitForSeconds(0.1f);
             if (currentHealth > 0)
             {
                 foreach (MeshRenderer mesh in meshs)
                     mesh.material.color = Color.white;
+
                 yield return new WaitForSeconds(0.1f);
 
             }

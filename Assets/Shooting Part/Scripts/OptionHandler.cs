@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class OptionHandler : MonoBehaviour
 {
-    private static readonly string FirstPlay = "FirstPlay";
     private static readonly string MouseSensitivityPref = "MouseSensitivityPref";
     private int firstPlayInt;
     public Slider mouseSensitivitySlider;
@@ -36,21 +35,10 @@ public class OptionHandler : MonoBehaviour
         returnStageSelectButton.onClick.AddListener(ReturnStageSelect);
         returnMainButton.onClick.AddListener(ReturnMain);
 
-        firstPlayInt = PlayerPrefs.GetInt(FirstPlay);
+        mouseSensitivityFloat = PlayerPrefs.GetFloat(MouseSensitivityPref);
+        mouseSensitivitySlider.value = mouseSensitivityFloat;
 
-        if (firstPlayInt == 0)
-        {
-            mouseSensitivityFloat = 0.3f;
-            mouseSensitivitySlider.value = mouseSensitivityFloat;
-            PlayerPrefs.SetFloat(MouseSensitivityPref, mouseSensitivityFloat);
-            PlayerPrefs.SetInt(FirstPlay, -1);
-        }
-        else
-        {
-            mouseSensitivityFloat = PlayerPrefs.GetFloat(MouseSensitivityPref);
-            mouseSensitivitySlider.value = mouseSensitivityFloat;
 
-        }
         UpdateMouseSensitivity();
     }
     void Update()

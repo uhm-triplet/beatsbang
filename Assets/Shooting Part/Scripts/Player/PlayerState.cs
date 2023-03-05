@@ -56,7 +56,7 @@ public class PlayerState : MonoBehaviour
     {
         // Interaction();
         getInput();
-        Swap();
+        // Swap();
     }
 
     void getInput()

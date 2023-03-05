@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938749908939037}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938749944408129}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 1652938750102307907}
   - component: {fileID: 1652938750102307906}
   - component: {fileID: 1652938750102307905}
-  m_Layer: 13
+  m_Layer: 7
   m_Name: BossMeleeArea
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -126,6 +126,9 @@ MonoBehaviour:
   damage: 25
   isMelee: 1
   isRock: 0
+  meshObj: {fileID: 0}
+  effectObj: {fileID: 0}
+  rigid: {fileID: 0}
 --- !u!1 &1652938750160126463
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938750160126462}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: MissilePortA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +171,7 @@ GameObject:
   - component: {fileID: 1652938750494946073}
   - component: {fileID: 1652938750494946079}
   - component: {fileID: 1652938750494946072}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: BodyLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +254,7 @@ GameObject:
   - component: {fileID: 1652938750595944218}
   - component: {fileID: 1652938750595944216}
   - component: {fileID: 1652938750595944217}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: BodyUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938750597634820}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938750612493237}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938750801497822}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_L.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +433,7 @@ GameObject:
   - component: {fileID: 1652938750897454397}
   - component: {fileID: 1652938750897454403}
   - component: {fileID: 1652938750897454396}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938751218531943}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_R.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1652938751319693084}
   - component: {fileID: 1652938751319693085}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +600,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938751424972946}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: MissilePortB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +631,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938751524912408}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_Head_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +664,7 @@ GameObject:
   - component: {fileID: 1652938751545409341}
   - component: {fileID: 1652938751545409347}
   - component: {fileID: 1652938751545409340}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938751629247247}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938751653438493}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652938751718705448}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +847,7 @@ GameObject:
   - component: {fileID: 1652938751319693091}
   - component: {fileID: 1652938751319693089}
   - component: {fileID: 1652938751319693088}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Enemy D
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -937,6 +940,7 @@ MonoBehaviour:
   enemyType: 3
   maxHealth: 1000
   currentHealth: 1000
+  gameManager: {fileID: 0}
   target: {fileID: 2026204685766474599, guid: 07fe5a0065002814d89758b816d49a16, type: 3}
   meleeArea: {fileID: 1652938750102307906}
   isChase: 0
@@ -950,6 +954,9 @@ MonoBehaviour:
   nav: {fileID: 0}
   animator: {fileID: 0}
   effectObj: {fileID: 3417139479133818701}
+  hitSound: {fileID: 0}
+  dieSound: {fileID: 0}
+  bossDieSound: {fileID: 0}
   missile: {fileID: 4315916050157263912, guid: 098452b2379f4dc4a93cae99a4e4cc22, type: 3}
   missilePortA: {fileID: 1652938750160126462}
   missilePortB: {fileID: 1652938751424972946}
@@ -1022,9 +1029,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5628386394665441181, guid: be16a2ead503d12418c1f228fcee2f7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8142776624367745201, guid: be16a2ead503d12418c1f228fcee2f7c, type: 3}
       propertyPath: m_Name
       value: Enemy Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142776624367745201, guid: be16a2ead503d12418c1f228fcee2f7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8142776624367745201, guid: be16a2ead503d12418c1f228fcee2f7c, type: 3}
       propertyPath: m_IsActive

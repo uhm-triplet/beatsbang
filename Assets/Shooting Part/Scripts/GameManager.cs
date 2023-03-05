@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject stageClearUI;
 
+    public GameManagerRhythm rhythmManager;
+
     void Awake()
     {
         weaponAmmoTxt.text = "   - / -";
@@ -154,6 +156,12 @@ public class GameManager : MonoBehaviour
     void StageEnd()
     {
         Debug.Log("Stage Clear");
+        PlayerPrefs.SetInt($"Stage{stage}Clear", 1);
+        PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
+        if (PlayerPrefs.GetInt($"Stage{stage}BestScore") < PlayerPrefs.GetInt($"Stage{stage}Score"))
+        {
+            PlayerPrefs.SetInt($"Stage{stage}BestScore", rhythmManager.score);
+        }
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         stageClearUI.SetActive(true);
@@ -162,6 +170,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
+        PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         gameOverUI.SetActive(true);

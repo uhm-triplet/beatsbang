@@ -28,6 +28,20 @@ public class GameResultHandler : MonoBehaviour
         returnMainButton.onClick.AddListener(ReturnMain);
     }
 
+    void Update()
+    {
+        scoreText.text = "Score : " + PlayerPrefs.GetInt($"Stage{gameManager.stage}Score").ToString();
+        if (PlayerPrefs.GetInt($"Stage{gameManager.stage}BestScore") != 0)
+        {
+            highScoreText.text = "Best Score : " + PlayerPrefs.GetInt($"Stage{gameManager.stage}BestScore").ToString();
+        }
+        else
+        {
+            highScoreText.text = "Best Score : -";
+
+        }
+    }
+
     public void NextStage()
     {
         buttonClickSound.Play();

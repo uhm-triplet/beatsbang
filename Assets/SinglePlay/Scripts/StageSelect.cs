@@ -37,7 +37,39 @@ public class StageSelect : MonoBehaviour
     {
         // _leftButton.onClick.AddListener(OnLeftButtonClicked);
         backMainButton.onClick.AddListener(ReturnMainMenu);
+        DisableButton();
+        UpdateScore();
 
+    }
+
+    void UpdateScore()
+    {
+        stage1ScoreText.text = PlayerPrefs.GetInt("Stage1Clear") == 1 ? "Best Score : \n" + PlayerPrefs.GetInt("Stage1BestScore").ToString() : "Stage Unclear";
+        stage2ScoreText.text = PlayerPrefs.GetInt("Stage2Clear") == 1 ? "Best Score : \n" + PlayerPrefs.GetInt("Stage2BestScore").ToString() : "Stage Unclear";
+        stage3ScoreText.text = PlayerPrefs.GetInt("Stage3Clear") == 1 ? "Best Score : \n" + PlayerPrefs.GetInt("Stage3BestScore").ToString() : "Stage Unclear";
+        stage4ScoreText.text = PlayerPrefs.GetInt("Stage4Clear") == 1 ? "Best Score : \n" + PlayerPrefs.GetInt("Stage4BestScore").ToString() : "Stage Unclear";
+    }
+
+    void DisableButton()
+    {
+        if (PlayerPrefs.GetInt("Stage1Clear") != 1)
+        {
+            stage2Button.interactable = false;
+            stage2Button.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+
+        }
+        if (PlayerPrefs.GetInt("Stage2Clear") != 1)
+        {
+            stage3Button.interactable = false;
+            stage3Button.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+
+
+        }
+        if (PlayerPrefs.GetInt("Stage3Clear") != 1)
+        {
+            stage4Button.interactable = false;
+            stage4Button.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+        }
 
     }
 
