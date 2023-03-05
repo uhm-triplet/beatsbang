@@ -1407,7 +1407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 6}
+  m_AnchoredPosition: {x: 21, y: 14}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462618707
@@ -1430,7 +1430,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Best Time : --:--'
+  m_text: 'Best Score :
+
+    Stage Unclear'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3bae5d55e825e14192ade6274987818, type: 2}
   m_sharedMaterial: {fileID: -8393780077241426972, guid: c3bae5d55e825e14192ade6274987818, type: 2}
@@ -1580,7 +1582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 6}
+  m_AnchoredPosition: {x: 21, y: 14}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634736287
@@ -1603,7 +1605,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Best Time : --:--'
+  m_text: 'Best Score :
+
+    Stage Unclear'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3bae5d55e825e14192ade6274987818, type: 2}
   m_sharedMaterial: {fileID: -8393780077241426972, guid: c3bae5d55e825e14192ade6274987818, type: 2}
@@ -2365,7 +2369,7 @@ RectTransform:
   m_GameObject: {fileID: 1267140401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1456702324}
@@ -2376,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 140}
+  m_AnchoredPosition: {x: 16, y: 194}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1267140403
@@ -2586,7 +2590,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 6}
+  m_AnchoredPosition: {x: 21, y: 14}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1312531934
@@ -2609,7 +2613,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Best Time : --:--'
+  m_text: "Best Score : \nStage Unclear"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3bae5d55e825e14192ade6274987818, type: 2}
   m_sharedMaterial: {fileID: -8393780077241426972, guid: c3bae5d55e825e14192ade6274987818, type: 2}
@@ -2925,7 +2929,7 @@ RectTransform:
   m_GameObject: {fileID: 1445160413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 34738756}
@@ -2936,7 +2940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -47, y: 140}
+  m_AnchoredPosition: {x: -101, y: 197}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1445160415
@@ -3139,7 +3143,7 @@ RectTransform:
   m_GameObject: {fileID: 1456812410}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1667879332}
@@ -3150,7 +3154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 67, y: -138}
+  m_AnchoredPosition: {x: 67, y: -195}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1456812412
@@ -4412,7 +4416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 6}
+  m_AnchoredPosition: {x: 21, y: 14}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1901114324
@@ -4435,7 +4439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Best Time : --:--'
+  m_text: "Best Score : \nStage Unclear"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3bae5d55e825e14192ade6274987818, type: 2}
   m_sharedMaterial: {fileID: -8393780077241426972, guid: c3bae5d55e825e14192ade6274987818, type: 2}
@@ -4588,7 +4592,7 @@ RectTransform:
   m_GameObject: {fileID: 2078986938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1647988119}
@@ -4599,7 +4603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12, y: -139}
+  m_AnchoredPosition: {x: -27, y: -200}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078986940

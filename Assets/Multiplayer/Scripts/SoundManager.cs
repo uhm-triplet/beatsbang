@@ -6,7 +6,11 @@ public class SoundManager : MonoBehaviour
     private static readonly string FirstPlay = "FirstPlay";
     private static readonly string BackgroundPref = "BackgroundPref";
     private static readonly string SoundEffectsPref = "SoundEffectsPref";
+    private static readonly string MouseSensitivityPref = "MouseSensitivityPref";
+
     private int firstPlayInt;
+    private float mouseSensitivityFloat;
+
     public Slider backgroundSlider, soundEffectsSlider;
     private float backgroundFloat, soundEffectsFloat;
     public AudioSource backgroundAudio;
@@ -22,6 +26,8 @@ public class SoundManager : MonoBehaviour
             soundEffectsFloat = 0.75f;
             backgroundSlider.value = backgroundFloat;
             soundEffectsSlider.value = soundEffectsFloat;
+            mouseSensitivityFloat = 0.3f;
+            PlayerPrefs.SetFloat(MouseSensitivityPref, mouseSensitivityFloat);
             PlayerPrefs.SetFloat(BackgroundPref, backgroundFloat);
             PlayerPrefs.SetFloat(SoundEffectsPref, soundEffectsFloat);
             PlayerPrefs.SetInt(FirstPlay, -1);

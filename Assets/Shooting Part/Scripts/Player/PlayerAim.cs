@@ -18,8 +18,12 @@ public class PlayerAim : MonoBehaviour
     [HideInInspector] public Vector3 aimPos;
     [SerializeField] float aimSmoothSpeed = 50;
     [SerializeField] LayerMask aimMask;
+    PlayerState playerState;
 
-
+    void Awake()
+    {
+        playerState = GetComponentInParent<PlayerState>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +37,13 @@ public class PlayerAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerState.isDead) return;
         xAxis.Update(Time.deltaTime);
         yAxis.Update(Time.deltaTime);
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, currentFov, fovSmoothSpeed * Time.deltaTime);
 
-        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        Vector2 screenCenter = new Vector2(Screen.width - (Screen.width * 2 / 5), Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, aimMask))

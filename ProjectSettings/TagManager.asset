@@ -15,19 +15,15 @@ TagManager:
   - EnemyBullet
   - Player2
   - Activator
+  - HoldBar
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  -
+  - Player
   - Water
   - UI
   - Ground
-  - Player
-  - PlayerBullet
-  - BulletCase
-  - Items
-  - Dead
   - Enemy
   - EnemyBullet
   -
@@ -51,7 +47,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Foreground
-    uniqueID: 2239528081
     locked: 0

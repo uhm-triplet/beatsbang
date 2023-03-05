@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public Type enemyType;
     public int maxHealth;
     public int currentHealth;
+    public GameManager gameManager;
     public Transform target;
     public BoxCollider meleeArea;
     public bool isChase;
@@ -221,39 +222,60 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     IEnumerator OnDamage()
     {
-        Debug.Log(hitSound);
-        hitSound.Play();
-        foreach (MeshRenderer mesh in meshs)
-            mesh.material.color = Color.red;
-
-        yield return new WaitForSeconds(0.1f);
-        if (currentHealth > 0)
+        if (!isDead)
         {
-            foreach (MeshRenderer mesh in meshs)
-                mesh.material.color = Color.white;
-        }
-        else
-        {
-            isChase = false;
-            isDead = true;
-            nav.enabled = false;
-            animator.SetTrigger("doDie");
-            if (isBoss)
+            hitSound.Play();
+            if (currentHealth <= 0)
             {
-                effectObj.SetActive(true);
-                bossDieSound.Play();
-            }
-            else
-            {
-                dieSound.Play();
-            }
-            foreach (MeshRenderer mesh in meshs)
-                mesh.material.color = Color.gray;
-            gameObject.layer = 11;
-            rigid.AddForce(Vector3.up * 2, ForceMode.Impulse);
-            if (enemyType != Type.D)
-                Destroy(gameObject, 4);
-        }
+                isDead = true;
+                isChase = false;
+                nav.enabled = false;
+                animator.SetTrigger("doDie");
 
+                switch (enemyType)
+                {
+                    case Type.A:
+                        gameManager.enemyACnt--;
+                        break;
+                    case Type.B:
+                        gameManager.enemyBCnt--;
+                        break;
+                    case Type.C:
+                        gameManager.enemyCCnt--;
+                        break;
+                    case Type.D:
+                        gameManager.enemyDCnt--;
+                        break;
+                }
+
+                if (isBoss)
+                {
+                    effectObj.SetActive(true);
+                    bossDieSound.Play();
+                }
+                else
+                {
+                    dieSound.Play();
+                }
+                foreach (MeshRenderer mesh in meshs)
+                    mesh.material.color = Color.gray;
+                rigid.AddForce(Vector3.up * 2, ForceMode.Impulse);
+                if (enemyType != Type.D)
+                    Destroy(gameObject, 1);
+            }
+            foreach (MeshRenderer mesh in meshs)
+                mesh.material.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            if (currentHealth > 0)
+            {
+                foreach (MeshRenderer mesh in meshs)
+                    mesh.material.color = Color.white;
+
+                yield return new WaitForSeconds(0.1f);
+
+            }
+
+
+        }
     }
 }

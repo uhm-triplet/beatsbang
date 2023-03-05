@@ -25,10 +25,14 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rigid;
 
     PlayerWeapon playerWeapon;
+    PlayerState playerState;
+
     private AudioSource walkSound;
     private AudioSource runSound;
     private AudioSource jumpSound;
     private AudioSource landSound;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -38,6 +42,7 @@ public class PlayerMove : MonoBehaviour
         jumpSound = GameObject.Find("SFX/Player/Jump").GetComponent<AudioSource>();
         landSound = GameObject.Find("SFX/Player/Land").GetComponent<AudioSource>();
 
+        playerState = GetComponentInParent<PlayerState>();
         playerWeapon = GetComponentInParent<PlayerWeapon>();
         controller = GetComponent<CharacterController>();
         rigid = GetComponent<Rigidbody>();
@@ -47,9 +52,10 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Gravity();
+        if (playerState.isDead) return;
         getInput();
         move();
-        Gravity();
         jump();
         dodge();
         jumpEnd();
