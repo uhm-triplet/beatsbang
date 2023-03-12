@@ -34,7 +34,7 @@ public class GameManagerRhythm : MonoBehaviour
 
     void GiveGrenade()
     {
-        if (streak != 0 && streak % 10 == 0)
+        if (streak != 0 && streak % 50 == 0)
         {
             if (playerState.hasGrenades == playerState.maxHasGrenades)
                 return;
@@ -94,37 +94,42 @@ public class GameManagerRhythm : MonoBehaviour
 
     public int NormalHit()
     {
-        GetSupply();
+        GetSupply(multiplier);
         return scorePerNote * multiplier;
     }
 
     public int GoodHit()
     {
-        GetSupply();
+        GetSupply(multiplier);
         return scorePerGoodNote * multiplier;
     }
 
     public int PerfectHit()
     {
-        GetSupply();
+        GetSupply(multiplier);
         return scorePerPerfectNote * multiplier;
     }
 
     public int GetScore()
     {
-        GetSupply();
+        GetSupply(multiplier);
         return scorePerNote * multiplier;
     }
 
-    void GetSupply()
+    void GetSupply(int multiplier)
     {
         if (currentMode == Mode.Ammo)
         {
-            playerState.ammo++;
+            playerState.ammo += multiplier * 2;
+            if (playerState.ammo > playerState.maxAmmo)
+                playerState.ammo = playerState.maxAmmo;
+
         }
         else if (currentMode == Mode.Health)
         {
-            playerState.health++;
+            playerState.health += multiplier;
+            if (playerState.health > playerState.maxHealth)
+                playerState.health = playerState.maxHealth;
         }
     }
 

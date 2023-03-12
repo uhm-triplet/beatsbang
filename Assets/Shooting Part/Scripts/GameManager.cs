@@ -120,6 +120,23 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
+            else if (stage == 4 && i <= 20)
+            {
+                int ran = Random.Range(0, 3);
+                enemyList.Add(ran);
+                switch (ran)
+                {
+                    case 0:
+                        enemyACnt++;
+                        break;
+                    case 1:
+                        enemyBCnt++;
+                        break;
+                    case 2:
+                        enemyCCnt++;
+                        break;
+                }
+            }
         }
 
         if (stage == 4)

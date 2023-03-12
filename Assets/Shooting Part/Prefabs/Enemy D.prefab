@@ -938,8 +938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 3
-  maxHealth: 1000
-  currentHealth: 1000
+  maxHealth: 5000
+  currentHealth: 5000
   gameManager: {fileID: 0}
   target: {fileID: 2026204685766474599, guid: 07fe5a0065002814d89758b816d49a16, type: 3}
   meleeArea: {fileID: 1652938750102307906}

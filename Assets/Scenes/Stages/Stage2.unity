@@ -23391,7 +23391,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1267d020c1733ec46a5b03232977d35d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1333173f210503f4a871a8f1c10cf4c5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -41391,7 +41391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: ammo
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: hasWeapon
@@ -41476,6 +41476,10 @@ PrefabInstance:
     - target: {fileID: 8189835802395886769, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189835802488974825, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802488974827, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: m_Layer
