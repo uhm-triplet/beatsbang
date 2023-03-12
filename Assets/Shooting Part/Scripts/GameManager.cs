@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
+
         }
 
         if (stage == 4)
