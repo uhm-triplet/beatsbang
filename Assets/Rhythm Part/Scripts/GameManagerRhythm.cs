@@ -18,13 +18,12 @@ public class GameManagerRhythm : MonoBehaviour
 
     [SerializeField] PlayerState playerState;
 
-    [SerializeField] Camera camera;
     Mode currentMode = Mode.Ammo;
     bool oneDown;
     bool twoDown;
 
-    public Color color1 = Color.red;
-    public Color color2 = Color.green;
+    [SerializeField] GameObject hpParticle;
+    [SerializeField] GameObject ammoParticle;
 
     private void Update()
     {
@@ -53,12 +52,14 @@ public class GameManagerRhythm : MonoBehaviour
     {
         if (oneDown)
         {
-            camera.backgroundColor = color2;
+            hpParticle.SetActive(true);
+            ammoParticle.SetActive(false);
             currentMode = Mode.Health;
         }
         if (twoDown)
         {
-            camera.backgroundColor = color1;
+            hpParticle.SetActive(false);
+            ammoParticle.SetActive(true);
             currentMode = Mode.Ammo;
         }
     }
