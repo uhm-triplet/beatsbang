@@ -15,6 +15,7 @@ public class BossRock : Bullet
         // rigid = GetComponent<Rigidbody>();
         StartCoroutine(GainPowerTimer());
         StartCoroutine(GainPower());
+        Invoke("OnHit", 10f);
     }
     IEnumerator GainPowerTimer()
     {

@@ -94,6 +94,7 @@ public class Activator : MonoBehaviour
             //AddScore();
             active = false;
         }
+
         else if (Input.GetKeyDown(key) && !active && isResetZone)
         {
             if (note)

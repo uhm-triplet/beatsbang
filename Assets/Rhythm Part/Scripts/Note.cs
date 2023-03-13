@@ -38,12 +38,17 @@ public class Note : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, RemovePos, speed * Time.deltaTime);
 
-        if (transform.position == new Vector3(RemovePos.x, RemovePos.y, 0))
+        if (Vector3.Distance(transform.position, new Vector3(RemovePos.x, RemovePos.y, 0)) <= 0)
         {
             if (type == Type.Left)
+            {
                 activatorL.OnFail();
+            }
             else if (type == Type.Right)
+            {
                 activatorR.OnFail();
+
+            }
             Destroy(gameObject);
         }
     }
