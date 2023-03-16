@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6185794164975195396}
   - component: {fileID: 5917503684431889090}
   - component: {fileID: 313311142323695008}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 313311142323695011}
   - component: {fileID: 313311142323695010}
   - component: {fileID: 7019434966310558645}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Throw Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,8 +272,6 @@ MonoBehaviour:
   meshObj: {fileID: 6794603415733615138}
   effectObj: {fileID: 1326576647974811792}
   rigid: {fileID: 313311142323695010}
-  throwSound: {fileID: 8300000, guid: 01c7910ef0bf9f048ad6ae9d63611df8, type: 3}
-  explodeSound: {fileID: 8300000, guid: 1c21e7b43255fff4c8bd8f1536639d1b, type: 3}
 --- !u!1001 &313311141387148497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1599315238913598529, guid: 46ffadbb188f9ab498b623c4290ef656, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1599315238913598529, guid: 46ffadbb188f9ab498b623c4290ef656, type: 3}
       propertyPath: m_IsActive
@@ -351,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3487559507645470289, guid: 46ffadbb188f9ab498b623c4290ef656, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4824182400241798983, guid: 46ffadbb188f9ab498b623c4290ef656, type: 3}
       propertyPath: m_Materials.Array.size
