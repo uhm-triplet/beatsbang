@@ -273,7 +273,34 @@ public class Beatmaps
 
 
 
-    public static Beatmap[] mySongs = new Beatmap[] { demo1, Stage2 };
+    static float[] Stage4Right = {
+    //run
+    2.0f, 3.0f, 4.0f, 5.0f, 6.0f ,7.0f,
+    //2
+    13.84f, 14.34f, 14.62f, 14.858f, 15.20f, 15.37f, 15.71f, 15.97f, 16.22f, 
+    //1.1
+    19.124f,
+    //2.1
+    19.304f, 19.804f, 20.084f, 20.322f, 20.664001f, 20.834f, 21.174f, 21.434002f, 21.684f
+    };
+
+    static float[] Stage4Left = {
+    //run
+    2.5f, 3.5f, 4.5f, 5.5f, 6.5f, 7.5f,
+    //1
+    11.28f, 11.63f, 11.91f, 12.13f, 12.46f, 12.66f, 12.98f, 13.25f, 13.50f, 13.66f,
+    // 1.1
+    16.401f, 16.744f, 16.744f, 17.094f, 17.374f, 17.594f, 17.924f, 18.124f, 18.444f, 18.964f,
+    //2.1
+    21.852f,
+    //1.2
+    22.195f, 22.545f, 22.825f, 23.045f
+
+    };
+
+    static Beatmap Stage4 = new Beatmap(Stage4Left, Stage4Right);
+
+    public static Beatmap[] mySongs = new Beatmap[] { demo1, Stage2, Stage4 };
 
 
 }

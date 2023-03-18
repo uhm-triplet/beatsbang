@@ -27,6 +27,8 @@ public class PlayerWeapon : MonoBehaviour
     private AudioSource swingSound;
     private AudioSource reloadSound;
 
+    int animationIndex = 0;
+
 
     void GetInput()
     {
@@ -74,8 +76,24 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (playerState.equipWeapon.type == Weapon.Type.Melee) swingSound.Play();
             else shootSound.Play();
+            if (animationIndex % 4 == 0)
+            {
+                animator.SetTrigger("doShot");
+            }
+            else if (animationIndex % 4 == 1)
+            {
+                animator.SetTrigger("doShot2");
+            }
+            else if (animationIndex % 4 == 2)
+            {
+                animator.SetTrigger("doShot4");
+            }
+            else
+            {
+                animator.SetTrigger("doShot3");
 
-            animator.SetTrigger(playerState.equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
+            }
+            animationIndex++;
             playerState.equipWeapon.Use();
             fireDelay = 0;
 

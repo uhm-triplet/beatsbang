@@ -113,7 +113,7 @@ public class PlayerMove : MonoBehaviour
     bool isGrounded()
     {
         spherePos = new Vector3(transform.position.x, transform.position.y - groundYOffset, transform.position.z);
-        if (Physics.CheckSphere(spherePos, controller.radius - 0.05f, groundMask))
+        if (Physics.CheckSphere(spherePos, controller.radius - 0.5f, groundMask))
         {
             return true;
         }
@@ -159,7 +159,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetTrigger("doDodge");
             isDodge = true;
 
-            Invoke("endDodge", 0.4f);
+            Invoke("endDodge", 0.1f);
             //쿨타임 만들고 싶으면 endDodge를 두개로 쪼개서 invoke 시간 따로
         }
 

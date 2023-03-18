@@ -21,8 +21,9 @@ public class ResetZone : MonoBehaviour
     {
         if (other.gameObject.tag == "Note")
         {
-            if (type == ActivatorType.Left) activatorL.isResetZone = true;
-            else activatorR.isResetZone = true;
+            if (type == ActivatorType.Left) activatorL.fastNote = other.gameObject;
+            else activatorR.fastNote = other.gameObject;
+
         }
 
     }
@@ -31,8 +32,9 @@ public class ResetZone : MonoBehaviour
     {
         if (other.gameObject.tag == "Note")
         {
-            if (type == ActivatorType.Left) activatorL.isResetZone = false;
-            else activatorR.isResetZone = false;
+            if (type == ActivatorType.Left) activatorL.fastNote = null;
+            else activatorR.fastNote = null;
+
         }
     }
 

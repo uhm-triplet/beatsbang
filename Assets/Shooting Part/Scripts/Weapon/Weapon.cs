@@ -9,11 +9,8 @@ public class Weapon : MonoBehaviour
     public Type type;
     public int damage;
     public float rate;
-    public int maxAmmo;
-    public int curAmmo;
 
-    public BoxCollider meleeArea;
-    public TrailRenderer trailEffect;
+
     [SerializeField] Transform bulletPos;
     public GameObject bullet;
     [SerializeField] float bulletVelocity;
@@ -22,6 +19,7 @@ public class Weapon : MonoBehaviour
 
     PlayerAim playerAim;
     PlayerState playerState;
+
 
     void Start()
     {
@@ -32,13 +30,7 @@ public class Weapon : MonoBehaviour
 
     public void Use()
     {
-
-        if (type == Type.Melee)
-        {
-            StopCoroutine("Swing");
-            StartCoroutine("Swing");
-        }
-        else if (type == Type.Range && playerState.ammo > 0)
+        if (type == Type.Range && playerState.ammo > 0)
         {
             playerState.ammo--;
             StartCoroutine("Shot");
@@ -47,18 +39,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    IEnumerator Swing()
-    {
-        yield return new WaitForSeconds(0.1f);
-        meleeArea.enabled = true;
-        trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.3f);
-        meleeArea.enabled = false;
-
-        yield return new WaitForSeconds(0.3f);
-        trailEffect.enabled = false;
-    }
     IEnumerator Shot()
     {
 
