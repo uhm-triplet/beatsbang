@@ -81,9 +81,17 @@ public class Beatmaps
                             85.00f, 85.85f, 86.70f, 87.55f,
                             91.85f, 92.70f, 93.55f, 94.40f,
                     };
-    static Beatmap demo1 = new Beatmap(demo1Left, demo1Right);
 
-    public static Beatmap[] mySongs = new Beatmap[] { demo1 };
+     static float[] shaneLeft =  { 
+                    
+                    };
+    static float[] shaneRight = { 
+                    
+                    };
+
+    static Beatmap stage1 = new Beatmap(shaneLeft, shaneRight);
+
+    public static Beatmap[] mySongs = new Beatmap[] { stage1 };
 
 
 }
