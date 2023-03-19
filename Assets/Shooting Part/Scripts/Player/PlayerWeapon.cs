@@ -94,7 +94,7 @@ public class PlayerWeapon : MonoBehaviour
 
             }
             animationIndex++;
-            playerState.equipWeapon.Use();
+            playerState.equipWeapon.Use(playerState.focus);
             fireDelay = 0;
 
         }

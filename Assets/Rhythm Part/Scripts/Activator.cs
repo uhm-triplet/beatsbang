@@ -48,7 +48,7 @@ public class Activator : MonoBehaviour
         if (Input.GetKey(key))
         {
             Color original = sr.color;
-            sr.color = new Color(0, 0, 0);
+            sr.color = new Color(0, 1, 1);
             // holding = true;
 
         }
@@ -89,15 +89,8 @@ public class Activator : MonoBehaviour
 
         else if (Input.GetKeyDown(key) && !active && fastNote)
         {
-
-            Debug.Log("Work");
-
             Destroy(fastNote.gameObject);
-
             OnFail();
-
-
-
         }
 
 

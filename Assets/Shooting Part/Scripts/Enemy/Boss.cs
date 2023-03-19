@@ -46,7 +46,7 @@ public class Boss : Enemy
             rigid.velocity = Vector3.zero;
             return;
         }
-        if (Vector3.Magnitude(target.position - transform.position) >= 80)
+        if (Vector3.Magnitude(target.position - transform.position) >= 100)
         {
             isAttacking = false;
             return;

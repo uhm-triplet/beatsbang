@@ -28,8 +28,8 @@ TagManager:
   - Enemy
   - Map
   - Item
-  - 
-  - 
+  - EnemyBullet
+  - Boss
   - 
   - 
   - 

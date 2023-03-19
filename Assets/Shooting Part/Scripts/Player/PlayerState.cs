@@ -12,6 +12,7 @@ public class PlayerState : MonoBehaviour
     public int hasGrenades;
     public int ammo;
     public int health;
+    public int focus = 1;
 
     public int maxAmmo;
     public int maxHealth;

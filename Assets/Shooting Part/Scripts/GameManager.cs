@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     // public Enemy bossB;
     // public Enemy bossC;
     public Boss boss;
-    public float playTime = 754f;
+    public float playTime;
     public int stage = 0;
     public int enemyACnt = 0;
     public int enemyBCnt = 0;
@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
     // public TextMeshProUGUI deathTxt;
     public TextMeshProUGUI scoreTxt;
 
+    public Image AmmoImage;
+    public TextMeshProUGUI ammoDamageTxt;
+    [SerializeField] Color lightBlue;
+    [SerializeField] Color purple;
+    public RectTransform playerHealthBar;
     public TextMeshProUGUI playerHealthTxt;
     public TextMeshProUGUI playerAmmoTxt;
     // public TextMeshProUGUI playerCoinTxt;
@@ -34,13 +39,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI EnemyBTxt;
     public TextMeshProUGUI EnemyCTxt;
 
-    public Image hammerImg;
-    public Image handGunImg;
-    public Image subMachineGunImg;
     public TextMeshProUGUI weaponAmmoTxt;
     public TextMeshProUGUI grenadeCountTxt;
 
-    public Image bossImg;
     public RectTransform bossHealthGroup;
     public RectTransform bossHealthBar;
 
@@ -53,12 +54,15 @@ public class GameManager : MonoBehaviour
 
     public GameManagerRhythm rhythmManager;
 
+
+
+
+
+
+
     void Awake()
     {
         weaponAmmoTxt.text = "   - / -";
-        hammerImg.color = new Color(1, 1, 1, 0);
-        handGunImg.color = new Color(1, 1, 1, 0);
-        subMachineGunImg.color = new Color(1, 1, 1, 0);
         // bossAImg.color = new Color(1, 1, 1, 0);
         // bossBImg.color = new Color(1, 1, 1, 0);
         // bossCImg.color = new Color(1, 1, 1, 0);
@@ -210,37 +214,38 @@ public class GameManager : MonoBehaviour
         EnemyCTxt.text = enemyCCnt.ToString();
 
         grenadeCountTxt.text = playerState.hasGrenades + " / " + playerState.maxHasGrenades;
+        playerHealthBar.localScale = new Vector3((float)playerState.health / playerState.maxHealth, 1, 1);
+
+        if (playerState.focus == 1)
+        {
+            AmmoImage.color = lightBlue;
+            ammoDamageTxt.text = "5";
+            ammoDamageTxt.color = lightBlue;
+
+        }
+        else if (playerState.focus == 2)
+        {
+            AmmoImage.color = purple;
+            ammoDamageTxt.text = "10";
+            ammoDamageTxt.color = purple;
+
+        }
+        else if (playerState.focus == 3)
+        {
+            AmmoImage.color = Color.red;
+            ammoDamageTxt.text = "20";
+            ammoDamageTxt.color = Color.red;
+        }
+        else if (playerState.focus == 4)
+        {
+            AmmoImage.color = Color.yellow;
+            ammoDamageTxt.text = "50";
+            ammoDamageTxt.color = Color.yellow;
+        }
 
 
-
-
-        // if (stage == 1)
-        // {
-        //     bossHealthBar.localScale = new Vector3((float)bossA.currentHealth / bossA.maxHealth, 1, 1);
-        //     bossAImg.color = new Color(1, 1, 1, 1);
-        //     bossBImg.color = new Color(1, 1, 1, 0);
-        //     bossCImg.color = new Color(1, 1, 1, 0);
-        //     bossDImg.color = new Color(1, 1, 1, 0);
-        // }
-        // else if (stage == 2)
-        // {
-        //     bossHealthBar.localScale = new Vector3((float)bossB.currentHealth / bossB.maxHealth, 1, 1);
-        //     bossAImg.color = new Color(1, 1, 1, 0);
-        //     bossBImg.color = new Color(1, 1, 1, 1);
-        //     bossCImg.color = new Color(1, 1, 1, 0);
-        //     bossDImg.color = new Color(1, 1, 1, 0);
-        // }
-        // else if (stage == 3)
-        // {
-        //     bossHealthBar.localScale = new Vector3((float)bossC.currentHealth / bossC.maxHealth, 1, 1);
-        //     bossAImg.color = new Color(1, 1, 1, 0);
-        //     bossBImg.color = new Color(1, 1, 1, 0);
-        //     bossCImg.color = new Color(1, 1, 1, 1);
-        //     bossDImg.color = new Color(1, 1, 1, 0);
-        // }
         if (stage == 4)
         {
-            // bossImg.color = new Color(1, 1, 1, 1);
             bossHealthGroup.anchoredPosition = Vector3.down * 67;
             bossHealthBar.localScale = new Vector3((float)boss.currentHealth / boss.maxHealth, 1, 1);
         }
