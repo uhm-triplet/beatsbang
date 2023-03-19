@@ -83,9 +83,35 @@ public class Beatmaps
                     };
 
      static float[] shaneLeft =  { 
+                        // chorus is 3 second burst
+                        // first note of each chorus will have left+right
+                        // leave one note gap between choruses (0.35f)
+
+                        // chorus 1x
+                        7.05f, 
+                        7.40f, 8.10f, 8.80f, 
+                        9.50f,
+
+                        // chorus 2x
+                        
+
+                        // chorus 3x
+
+
+                        // chorus 4x
                     
                     };
     static float[] shaneRight = { 
+                        // chorus 1x
+                        7.05f, 
+                        7.75f, 8.45f, 9.15f,
+                        9.50f, 
+
+                        // chorus 2x
+                        
+
+                        // chorus 3x
+                        // chorus 4x
                     
                     };
 
