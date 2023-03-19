@@ -173,13 +173,13 @@ public class GameManagerRhythm : MonoBehaviour
 
     public int GoodHit()
     {
-        GetSupply(multiplier);
+        GetSupply(multiplier + 1);
         return scorePerGoodNote * multiplier;
     }
 
     public int PerfectHit()
     {
-        GetSupply(multiplier);
+        GetSupply(multiplier + 2);
         return scorePerPerfectNote * multiplier;
     }
 

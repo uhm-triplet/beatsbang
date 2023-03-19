@@ -207,7 +207,6 @@ public class GameManager : MonoBehaviour
 
         playerHealthTxt.text = playerState.health + " / " + playerState.maxHealth;
         playerAmmoTxt.text = playerState.ammo + " / " + playerState.maxAmmo;
-        scoreTxt.text = playerState.score.ToString();
 
         EnemyATxt.text = enemyACnt.ToString();
         EnemyBTxt.text = enemyBCnt.ToString();
