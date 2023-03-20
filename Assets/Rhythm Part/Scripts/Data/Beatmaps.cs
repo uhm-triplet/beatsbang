@@ -109,6 +109,22 @@ public class Beatmaps
                         17.35f,
                         17.75f, 18.45f, 19.15f,
                         19.90f,
+
+                        // bridge1 sounds
+                        27.90f, 29.60f, 31.20f, 32.80f,
+
+                        // chorus 5x
+                        34.40f,
+                        34.80f, 35.50f, 36.20f,
+                        36.95f,
+
+                        // chorus 6x
+                        37.85f,
+                        38.25f, 38.95f, 39.65f,
+                        40.40f,
+
+
+
                     
                     };
     static float[] shaneRight = { 
@@ -131,6 +147,20 @@ public class Beatmaps
                         17.35f,
                         18.10f, 18.80f, 19.50f,
                         19.90f, 
+
+                        // bridge1 sounds
+                        27.90f, 29.60f, 31.20f, 32.80f,
+
+                        // chorus 5x
+                        34.40f,
+                        35.15f, 35.85f, 36.55f,
+                        36.95f,
+
+                        // chorus 6x
+                        37.85f,
+                        38.60f, 39.30f, 40.00f,
+                        40.40f,
+                        
 
                     
                     };
