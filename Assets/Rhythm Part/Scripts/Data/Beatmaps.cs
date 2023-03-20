@@ -110,7 +110,7 @@ public class Beatmaps
                         17.75f, 18.45f, 19.15f,
                         19.90f,
 
-                        // bridge1 sounds
+                        // bridge1 (slow)
                         27.90f, 29.60f, 31.20f, 32.80f,
 
                         // chorus 5x
@@ -122,6 +122,31 @@ public class Beatmaps
                         37.85f,
                         38.25f, 38.95f, 39.65f,
                         40.40f,
+
+                        // bridge2 (fast)
+                        41.15f, 41.55f, 41.95f, 42.35f, 
+                        42.75f, 43.15f, 43.55f, 43.95f,
+
+                        // chorus 7x
+                        44.65f,
+                        45.05f, 45.75f, 46.45f,
+                        47.20f,
+
+                        // chorus 8x
+                        48.10f,
+                        48.50f, 49.20f, 49.90f,
+                        50.65f,
+
+                        // bridge3 (fast)
+                        51.40f, 51.80f, 52.20f, 52.60f,
+                        53.00f, 53.40f, 53.80f, 54.20f,
+
+                        // chorus 9x
+                        // chorus 10x
+                        // chorus 11x
+                        // chorus 12x
+
+                        // bridge4 (slow)
 
 
 
@@ -148,7 +173,7 @@ public class Beatmaps
                         18.10f, 18.80f, 19.50f,
                         19.90f, 
 
-                        // bridge1 sounds
+                        // bridge1 (slow)
                         27.90f, 29.60f, 31.20f, 32.80f,
 
                         // chorus 5x
@@ -160,8 +185,29 @@ public class Beatmaps
                         37.85f,
                         38.60f, 39.30f, 40.00f,
                         40.40f,
-                        
 
+                        // bridge2 (fast)
+                        42.95f, 43.35f, 43.75f, 44.15f,
+                        
+                        // chorus 7x
+                        44.65f,
+                        45.40f, 46.10f, 46.80f,
+                        47.20f,
+
+                        // chorus 8x
+                        48.10f,
+                        48.85f, 49.55f, 50.25f,
+                        50.65f, 
+
+                        // bridge3 (fast)
+                        53.20f, 53.60f, 54.00f, 54.40f,
+
+                        // chorus 9x
+                        // chorus 10x
+                        // chorus 11x
+                        // chorus 12x
+
+                        // bridge4 (slow)
                     
                     };
 
