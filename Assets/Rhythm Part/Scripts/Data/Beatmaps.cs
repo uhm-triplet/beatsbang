@@ -83,35 +83,55 @@ public class Beatmaps
                     };
 
      static float[] shaneLeft =  { 
-                        // chorus is 3 second burst
-                        // first note of each chorus will have left+right
-                        // leave one note gap between choruses (0.35f)
+                        // first note of each chorus will have left+right then 0.40f gap
+                        // chorus notes every 0.35f 
+                        // last note of each chorus will have 0.40f gap then left+right
+
+                        // leave gap between choruses (0.90f)
 
                         // chorus 1x
                         7.05f, 
-                        7.40f, 8.10f, 8.80f, 
-                        9.50f,
+                        7.45f, 8.15f, 8.85f, 
+                        9.60f,
 
                         // chorus 2x
+                        10.50f,
+                        10.85f, 11.55f, 12.25f,
+                        13.00f, 
                         
 
                         // chorus 3x
-
+                        13.90f,
+                        14.30f, 15.00f, 15.70f, 
+                        16.45f,
 
                         // chorus 4x
+                        17.35f,
+                        17.75f, 18.45f, 19.15f,
+                        19.90f,
                     
                     };
     static float[] shaneRight = { 
                         // chorus 1x
                         7.05f, 
-                        7.75f, 8.45f, 9.15f,
-                        9.50f, 
+                        7.80f, 8.50f, 9.20f,
+                        9.60f, 
 
                         // chorus 2x
-                        
+                        10.50f,
+                        11.20f, 11.90f, 12.60f,
+                        13.00f,
 
                         // chorus 3x
+                        13.90f,
+                        14.65f, 15.35f, 16.05f,
+                        16.45f, 
+
                         // chorus 4x
+                        17.35f,
+                        18.10f, 18.80f, 19.50f,
+                        19.90f, 
+
                     
                     };
 
