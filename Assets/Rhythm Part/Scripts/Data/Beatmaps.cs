@@ -142,6 +142,8 @@ public class Beatmaps
                         53.00f, 53.40f, 53.80f, 54.20f,
 
                         // chorus 9x
+                        54.90f, 
+
                         // chorus 10x
                         // chorus 11x
                         // chorus 12x
@@ -203,6 +205,8 @@ public class Beatmaps
                         53.20f, 53.60f, 54.00f, 54.40f,
 
                         // chorus 9x
+                        54.90f,
+
                         // chorus 10x
                         // chorus 11x
                         // chorus 12x
