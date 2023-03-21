@@ -18,12 +18,199 @@ public class Beatmaps
     static float[] Stage1Left =
     {
 
+                        // first note of each chorus will have left+right then 0.40f gap
+                        // chorus notes every 0.35f 
+                        // last note of each chorus will have 0.40f gap then left+right
+
+                        // leave gap between choruses (0.90f)
+
+                        // chorus 1x
+                        7.05f, 
+                        7.45f, 8.15f, 8.85f, 
+                        9.60f,
+
+                        // chorus 2x
+                        10.50f,
+                        10.85f, 11.55f, 12.25f,
+                        13.00f, 
+                        
+
+                        // chorus 3x
+                        13.90f,
+                        14.30f, 15.00f, 15.70f, 
+                        16.45f,
+
+                        // chorus 4x
+                        17.35f,
+                        17.75f, 18.45f, 19.15f,
+                        19.90f,
+
+                        // bridge1 (slow)
+                        27.90f, 29.60f, 31.20f, 32.80f,
+
+                        // chorus 5x
+                        34.40f,
+                        34.80f, 35.50f, 36.20f,
+                        36.95f,
+
+                        // chorus 6x
+                        37.85f,
+                        38.25f, 38.95f, 39.65f,
+                        40.40f,
+
+                        // bridge2 (fast)
+                        41.15f, 41.55f, 41.95f, 42.35f, 
+                        42.75f, 43.15f, 43.55f, 43.95f,
+
+                        // chorus 7x
+                        44.65f,
+                        45.05f, 45.75f, 46.45f,
+                        47.20f,
+
+                        // chorus 8x
+                        48.10f,
+                        48.50f, 49.20f, 49.90f,
+                        50.65f,
+
+                        // bridge3 (fast)
+                        51.40f, 51.80f, 52.20f, 52.60f,
+                        53.00f, 53.40f, 53.80f, 54.20f,
+
+                        // chorus 9x
+                        54.90f,
+                        55.30f, 56.00f, 56.70f,
+                        57.45f, 
+
+                        // chorus 10x
+                        58.35f,
+                        58.75f, 59.45f, 60.15f,
+                        60.90f,
+
+                        // chorus 11x
+                        61.80f,
+                        62.20f, 62.90f, 63.60f,
+                        64.35f,
+
+                        // chorus 12x
+                        65.25f,
+                        65.65f, 66.35f, 67.05f,
+                        67.80f,
+
+
+                        // bridge4 (slow)
+                        68.70f, 70.40f, 72.00f, 73.60f,
+
+                        // chorus 13x
+                        75.55f,
+                        75.95f, 76.65f, 77.35f,
+                        78.10f,
+
+                        // chorus 14x
+                        79.00f,
+                        79.40f, 80.10f, 80.80f,
+                        81.55f,
+                         
+
+                        // bridge5 (slow)
+                        82.60f, 84.30f, 85.90f, 87.50f,
+
+                        // end
+                        89.50f, 91.00f, 92.70f, 94.40f, 96.00f, 97.85f, 99.50f, 101.30f,
 
     };
-    static float[] Stage1Right = {
+    static float[] Stage1Right = 
+    {
 
+                        // chorus 1x
+                        7.05f, 
+                        7.80f, 8.50f, 9.20f,
+                        9.60f, 
 
-                    };
+                        // chorus 2x
+                        10.50f,
+                        11.20f, 11.90f, 12.60f,
+                        13.00f,
+
+                        // chorus 3x
+                        13.90f,
+                        14.65f, 15.35f, 16.05f,
+                        16.45f, 
+
+                        // chorus 4x
+                        17.35f,
+                        18.10f, 18.80f, 19.50f,
+                        19.90f, 
+
+                        // bridge1 (slow)
+                        27.90f, 29.60f, 31.20f, 32.80f,
+
+                        // chorus 5x
+                        34.40f,
+                        35.15f, 35.85f, 36.55f,
+                        36.95f,
+
+                        // chorus 6x
+                        37.85f,
+                        38.60f, 39.30f, 40.00f,
+                        40.40f,
+
+                        // bridge2 (fast)
+                        42.95f, 43.35f, 43.75f, 44.15f,
+                        
+                        // chorus 7x
+                        44.65f,
+                        45.40f, 46.10f, 46.80f,
+                        47.20f,
+
+                        // chorus 8x
+                        48.10f,
+                        48.85f, 49.55f, 50.25f,
+                        50.65f, 
+
+                        // bridge3 (fast)
+                        53.20f, 53.60f, 54.00f, 54.40f,
+
+                        // chorus 9x
+                        54.90f,
+                        55.65f, 56.35f, 57.05f,
+                        57.45f,
+
+                        // chorus 10x
+                        58.35f,
+                        59.10f, 59.80f, 60.50f,
+                        60.90f,
+
+                        // chorus 11x
+                        61.80f,
+                        62.55f, 63.25f, 63.95f,
+                        64.35f,
+
+                        // chorus 12x
+                        65.25f,
+                        66.00f, 66.70f, 67.40f,
+                        67.80f,
+
+                        // bridge4 (slow)
+                        68.70f, 70.40f, 72.00f, 73.60f,
+
+                        // chorus 13x
+                        75.55f,
+                        76.30f, 77.00f, 77.70f,
+                        78.10f,
+
+                        // chorus 14x
+                        79.00f,
+                        79.75f, 80.45f, 81.15f, 
+                        81.55f,
+                        
+
+                        // bridge5 (slow)
+                        82.60f, 84.30f, 85.90f, 87.50f,
+
+                        // end
+                        89.50f, 91.00f, 92.70f, 94.40f, 96.00f, 97.85f, 99.50f, 101.30f,
+
+    };
     static Beatmap Stage1 = new Beatmap(Stage1Left, Stage1Right);
 
     static float[] Stage2Left =
