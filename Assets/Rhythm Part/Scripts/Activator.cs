@@ -63,6 +63,14 @@ public class Activator : MonoBehaviour
             sr.color = original;
             // holding = false;
         }
+        if (Input.GetKeyDown(key))
+        {
+            if (hit.isPlaying)
+            {
+                hit.Stop();
+                hit.Play();
+            } 
+        }
     }
     void SingleNote()
     {
@@ -88,8 +96,6 @@ public class Activator : MonoBehaviour
                 Instantiate(perfectEffect, effectZone.position, perfectEffect.transform.rotation);
             }
 
-            hit.Play();
-
             Destroy(note.gameObject);
 
             active = false;
@@ -97,7 +103,6 @@ public class Activator : MonoBehaviour
 
         else if (Input.GetKeyDown(key) && !active && fastNote)
         {
-            miss.Play();
             Destroy(fastNote.gameObject);
             OnFail();
         }
@@ -119,7 +124,7 @@ public class Activator : MonoBehaviour
     {
         active = false;
         gm.GetComponent<GameManagerRhythm>().ResetStreak();
-
+        miss.Play();
         Instantiate(missEffect, effectZone.position, missEffect.transform.rotation);
     }
 
