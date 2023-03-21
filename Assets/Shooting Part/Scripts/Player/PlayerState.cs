@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerState : MonoBehaviour
     public int hasGrenades;
     public int ammo;
     public int health;
+    public int focus = 1;
 
     public int maxAmmo;
     public int maxHealth;
@@ -40,6 +42,8 @@ public class PlayerState : MonoBehaviour
 
     private AudioSource hitSound;
 
+    [SerializeField] GameObject damageScreen;
+
 
     void Awake()
     {
@@ -56,6 +60,7 @@ public class PlayerState : MonoBehaviour
     {
         // Interaction();
         getInput();
+        changeDmgScreen();
         // Swap();
     }
 
@@ -148,10 +153,12 @@ public class PlayerState : MonoBehaviour
         {
             OnDie();
         }
-        foreach (MeshRenderer mesh in meshs)
-        {
-            mesh.material.color = Color.yellow;
-        }
+
+        var color = damageScreen.GetComponent<Image>().color;
+        color.a = 0.8f;
+        damageScreen.GetComponent<Image>().color = color;
+
+
         if (isBossAttack)
         {
             //find better logic
@@ -163,13 +170,21 @@ public class PlayerState : MonoBehaviour
         if (isBossAttack)
             rigid.velocity = Vector3.zero;
         isDamage = false;
-        foreach (MeshRenderer mesh in meshs)
+
+    }
+
+    void changeDmgScreen()
+    {
+        if (damageScreen != null)
         {
-            mesh.material.color = Color.white;
+            if (damageScreen.GetComponent<Image>().color.a > 0)
+            {
+                var color = damageScreen.GetComponent<Image>().color;
+                color.a -= 0.02f;
+                damageScreen.GetComponent<Image>().color = color;
+
+            }
         }
-
-
-
     }
 
 

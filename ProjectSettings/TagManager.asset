@@ -16,6 +16,7 @@ TagManager:
   - Player2
   - Activator
   - HoldBar
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,13 @@ TagManager:
   - UI
   - Ground
   - Enemy
+  - Map
+  - Item
   - EnemyBullet
+  - Boss
   -
+  -
+  - 
   -
   -
   -

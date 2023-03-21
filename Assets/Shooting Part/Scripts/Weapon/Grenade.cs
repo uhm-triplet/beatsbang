@@ -10,6 +10,8 @@ public class Grenade : MonoBehaviour
 
     private AudioSource throwSound;
     private AudioSource explodeSound;
+    private bool exploded = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,10 +26,17 @@ public class Grenade : MonoBehaviour
         StartCoroutine(Explosion());
     }
 
-    // Update is called once per frame
-    IEnumerator Explosion()
+    private void OnCollisionEnter(Collision other)
     {
-        yield return new WaitForSeconds(3f);
+        if (other.gameObject.tag == "Enemy")
+        {
+            Explode();
+            exploded = true;
+        }
+    }
+
+    void Explode()
+    {
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         meshObj.SetActive(false);
@@ -38,8 +47,18 @@ public class Grenade : MonoBehaviour
         {
             hit.transform.GetComponent<Enemy>().HitByGrenade(transform.position);
         }
-        explodeSound.Play();
-        // AudioSource.PlayClipAtPoint(explodeSound, transform.position);
+        if (!explodeSound.isPlaying)
+            explodeSound.Play();
+    }
+
+    // Update is called once per frame
+    IEnumerator Explosion()
+    {
+        yield return new WaitForSeconds(3f);
+        if (!exploded)
+        {
+            Explode();
+        }
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }

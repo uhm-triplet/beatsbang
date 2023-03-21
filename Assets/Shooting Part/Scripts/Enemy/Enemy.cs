@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (nav.enabled && enemyType != Type.D && Vector3.Magnitude(target.position - transform.position) < 80)
+        if (nav.enabled && enemyType != Type.D && Vector3.Magnitude(target.position - transform.position) < 300)
         {
             if (enemyType != Type.D)
                 ChaseStart();
@@ -71,16 +71,8 @@ public class Enemy : MonoBehaviour
                 targetRange = 6f;
                 break;
             case Type.C:
-                if (isBoss)
-                {
-                    targetRadius = 0.5f;
-                    targetRange = 80f;
-                }
-                else
-                {
-                    targetRadius = 0.5f;
-                    targetRange = 60f;
-                }
+                targetRadius = 0.5f;
+                targetRange = 60f;
                 break;
 
         }
@@ -124,41 +116,14 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.C:
-                if (isBoss)
-                {
-                    yield return new WaitForSeconds(0.1f);
-                    GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
-                    Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
-                    rigidBullet.velocity = transform.forward * 40;
-                    yield return new WaitForSeconds(0.1f);
-                    GameObject instantBullet2 = Instantiate(bullet, transform.position, transform.rotation);
-                    Rigidbody rigidBullet2 = instantBullet2.GetComponent<Rigidbody>();
-                    rigidBullet2.velocity = transform.forward * 30;
-                    yield return new WaitForSeconds(0.1f);
-                    GameObject instantBullet3 = Instantiate(bullet, transform.position, transform.rotation);
-                    Rigidbody rigidBullet3 = instantBullet3.GetComponent<Rigidbody>();
-                    rigidBullet3.velocity = transform.forward * 20;
-                    yield return new WaitForSeconds(0.1f);
-                    GameObject instantBullet4 = Instantiate(bullet, transform.position, transform.rotation);
-                    Rigidbody rigidBullet4 = instantBullet4.GetComponent<Rigidbody>();
-                    rigidBullet4.velocity = transform.forward * 10;
-                    yield return new WaitForSeconds(0.1f);
-                    GameObject instantBullet5 = Instantiate(bullet, transform.position, transform.rotation);
-                    Rigidbody rigidBullet5 = instantBullet5.GetComponent<Rigidbody>();
-                    rigidBullet5.velocity = transform.forward * 5;
 
-                    yield return new WaitForSeconds(1.5f);
-                }
-                else
-                {
 
-                    yield return new WaitForSeconds(0.4f);
-                    GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
-                    Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
-                    rigidBullet.velocity = transform.forward * 20;
+                yield return new WaitForSeconds(0.4f);
+                GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+                Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
+                rigidBullet.velocity = transform.forward * 20;
 
-                    yield return new WaitForSeconds(2f);
-                }
+                yield return new WaitForSeconds(2f);
 
                 break;
 
@@ -194,14 +159,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Melee")
-        {
-            Weapon weapon = other.GetComponent<Weapon>();
-            currentHealth -= weapon.damage;
 
-            StartCoroutine(OnDamage());
-
-        }
         if (other.tag == "Bullet")
         {
             Bullet bullet = other.GetComponent<Bullet>();

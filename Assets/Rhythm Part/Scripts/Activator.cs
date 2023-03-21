@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Activator : MonoBehaviour
 {
-    SpriteRenderer sr;
+    [SerializeField] SpriteRenderer sr;
     public KeyCode key;
     bool active = false;
     public bool isResetZone = false;
@@ -20,12 +20,12 @@ public class Activator : MonoBehaviour
     public GameObject normalEffect, goodEffect, perfectEffect, missEffect;
     public Transform effectZone;
 
+    public GameObject fastNote;
 
     SongManager sm;
 
     void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
         sm = GameObject.Find("SongManager").GetComponent<SongManager>();
     }
 
@@ -48,7 +48,7 @@ public class Activator : MonoBehaviour
         if (Input.GetKey(key))
         {
             Color original = sr.color;
-            sr.color = new Color(0, 0, 0);
+            sr.color = new Color(0, 1, 1);
             // holding = true;
 
         }
@@ -67,42 +67,29 @@ public class Activator : MonoBehaviour
             if (Mathf.Abs(note.transform.position.y) > 0.75f)
             {
                 AddNormalScore();
-                Debug.Log("Normal Hit");
                 Instantiate(normalEffect, effectZone.position, normalEffect.transform.rotation);
             }
 
             else if (Mathf.Abs(note.transform.position.y) > 0.50f)
             {
                 AddGoodScore();
-                Debug.Log("Good Hit");
                 Instantiate(goodEffect, effectZone.position, goodEffect.transform.rotation);
             }
 
-            else if (note.transform.position.y >= 0)
+            else if (Mathf.Abs(note.transform.position.y) >= 0)
             {
                 AddPerfectScore();
-                Debug.Log("Perfect Hit");
                 Instantiate(perfectEffect, effectZone.position, perfectEffect.transform.rotation);
             }
-            if (note)
-            {
-                note.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                note.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                Destroy(note.gameObject, 0.1f);
-            }
 
-            //AddScore();
+            Destroy(note.gameObject);
+
             active = false;
         }
-        else if (Input.GetKeyDown(key) && !active && isResetZone)
-        {
-            if (note)
-            {
-                note.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                note.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                Destroy(note.gameObject, 0.1f);
-            }
 
+        else if (Input.GetKeyDown(key) && !active && fastNote)
+        {
+            Destroy(fastNote.gameObject);
             OnFail();
         }
 
@@ -116,6 +103,7 @@ public class Activator : MonoBehaviour
             active = true;
             note = other.gameObject;
         }
+
     }
 
     public void OnFail()

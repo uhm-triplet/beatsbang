@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerRhythm : MonoBehaviour
 {
     enum Mode
     {
-        Health, Ammo
+        Health, Ammo, Focus
     }
     public int score;
     public int multiplier = 1;
@@ -18,23 +19,77 @@ public class GameManagerRhythm : MonoBehaviour
 
     [SerializeField] PlayerState playerState;
 
-    [SerializeField] Camera camera;
+    int focus;
+    int maxFocus = 300;
     Mode currentMode = Mode.Ammo;
-    bool oneDown;
-    bool twoDown;
+    bool qDown;
+    bool wDown;
+    bool eDown;
 
-    public Color color1 = Color.red;
-    public Color color2 = Color.green;
+    [SerializeField] GameObject hpParticle;
+    [SerializeField] GameObject ammoParticle;
+    [SerializeField] GameObject focusParticle;
+
+
+    [SerializeField] GameObject hpImage;
+    [SerializeField] GameObject ammoImage;
+    [SerializeField] GameObject focusImage;
+
+    [SerializeField] Image playerBar;
+
+    [SerializeField] Color purple;
+
+
 
     private void Update()
     {
         GetInput();
         Swap();
+        UIChange();
+    }
+
+
+    void UIChange()
+    {
+        switch (currentMode)
+        {
+            case Mode.Health:
+                playerBar.color = Color.red;
+                playerBar.fillAmount = (float)playerState.health / (float)playerState.maxHealth;
+                hpImage.SetActive(true);
+                ammoImage.SetActive(false);
+                focusImage.SetActive(false);
+                break;
+            case Mode.Ammo:
+                playerBar.color = Color.yellow;
+                playerBar.fillAmount = (float)playerState.ammo / (float)playerState.maxAmmo;
+                hpImage.SetActive(false);
+                ammoImage.SetActive(true);
+                focusImage.SetActive(false);
+                break;
+            case Mode.Focus:
+
+                playerBar.fillAmount = (float)focus / (float)maxFocus;
+                if (focus < 100)
+                    playerBar.color = Color.blue;
+                else if (focus < 200)
+                    playerBar.color = purple;
+                else if (focus < 300)
+                    playerBar.color = Color.red;
+                else if (focus >= 300)
+                {
+                    playerBar.color = Color.yellow;
+                }
+                hpImage.SetActive(false);
+                ammoImage.SetActive(false);
+                focusImage.SetActive(true);
+                break;
+        }
     }
 
     void GiveGrenade()
     {
-        if (streak != 0 && streak % 10 == 0)
+        if (streak != 0 && streak % 50 == 0)
         {
             if (playerState.hasGrenades == playerState.maxHasGrenades)
                 return;
@@ -45,21 +100,39 @@ public class GameManagerRhythm : MonoBehaviour
 
     void GetInput()
     {
-        oneDown = Input.GetKeyDown(KeyCode.Alpha1);
-        twoDown = Input.GetKeyDown(KeyCode.Alpha2);
+        qDown = Input.GetKeyDown(KeyCode.Q);
+        wDown = Input.GetKeyDown(KeyCode.W);
+        eDown = Input.GetKeyDown(KeyCode.E);
     }
 
     void Swap()
     {
-        if (oneDown)
+        if (qDown)
         {
-            camera.backgroundColor = color2;
+            hpParticle.SetActive(true);
+            ammoParticle.SetActive(false);
+            focusParticle.SetActive(false);
             currentMode = Mode.Health;
+            focus = 0;
+            playerState.focus = 1;
+
         }
-        if (twoDown)
+        if (wDown)
         {
-            camera.backgroundColor = color1;
+            hpParticle.SetActive(false);
+            ammoParticle.SetActive(true);
+            focusParticle.SetActive(false);
             currentMode = Mode.Ammo;
+            focus = 0;
+            playerState.focus = 1;
+
+        }
+        if (eDown)
+        {
+            hpParticle.SetActive(false);
+            ammoParticle.SetActive(false);
+            focusParticle.SetActive(true);
+            currentMode = Mode.Focus;
         }
     }
 
@@ -68,15 +141,15 @@ public class GameManagerRhythm : MonoBehaviour
         streak++;
         GiveGrenade();
 
-        if (streak >= 24)
+        if (streak >= 100)
         {
             multiplier = 4;
         }
-        else if (streak >= 16)
+        else if (streak >= 50)
         {
             multiplier = 3;
         }
-        else if (streak >= 8)
+        else if (streak >= 25)
         {
             multiplier = 2;
         }
@@ -94,37 +167,58 @@ public class GameManagerRhythm : MonoBehaviour
 
     public int NormalHit()
     {
-        GetSupply();
+        GetSupply(multiplier);
         return scorePerNote * multiplier;
     }
 
     public int GoodHit()
     {
-        GetSupply();
+        GetSupply(multiplier + 1);
         return scorePerGoodNote * multiplier;
     }
 
     public int PerfectHit()
     {
-        GetSupply();
+        GetSupply(multiplier + 2);
         return scorePerPerfectNote * multiplier;
     }
 
     public int GetScore()
     {
-        GetSupply();
+        GetSupply(multiplier);
         return scorePerNote * multiplier;
     }
 
-    void GetSupply()
+    void GetSupply(int multiplier)
     {
         if (currentMode == Mode.Ammo)
         {
-            playerState.ammo++;
+            playerState.ammo += multiplier + 1;
+            if (playerState.ammo > playerState.maxAmmo)
+                playerState.ammo = playerState.maxAmmo;
+
         }
         else if (currentMode == Mode.Health)
         {
-            playerState.health++;
+            playerState.health += multiplier;
+            if (playerState.health > playerState.maxHealth)
+                playerState.health = playerState.maxHealth;
+        }
+        else if (currentMode == Mode.Focus)
+        {
+            focus += multiplier;
+            if (focus < 100)
+                playerState.focus = 1;
+            else if (focus < 200)
+                playerState.focus = 2;
+            else if (focus < 300)
+                playerState.focus = 3;
+            else if (focus >= 300)
+            {
+                focus = maxFocus;
+                playerState.focus = 4;
+            }
+
         }
     }
 

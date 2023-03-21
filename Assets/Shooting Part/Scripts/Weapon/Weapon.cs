@@ -7,21 +7,22 @@ public class Weapon : MonoBehaviour
 
     public enum Type { Melee, Range }
     public Type type;
-    public int damage;
     public float rate;
-    public int maxAmmo;
-    public int curAmmo;
 
-    public BoxCollider meleeArea;
-    public TrailRenderer trailEffect;
+
     [SerializeField] Transform bulletPos;
     public GameObject bullet;
+    public GameObject bulletBlue;
+    public GameObject bulletPurple;
+    public GameObject bulletRed;
+    public GameObject bulletRainbow;
     [SerializeField] float bulletVelocity;
     public Transform bulletCasePos;
     public GameObject bulletCase;
 
     PlayerAim playerAim;
     PlayerState playerState;
+
 
     void Start()
     {
@@ -30,39 +31,37 @@ public class Weapon : MonoBehaviour
     }
 
 
-    public void Use()
+    public void Use(int focus)
     {
-
-        if (type == Type.Melee)
-        {
-            StopCoroutine("Swing");
-            StartCoroutine("Swing");
-        }
-        else if (type == Type.Range && playerState.ammo > 0)
+        if (type == Type.Range && playerState.ammo > 0)
         {
             playerState.ammo--;
-            StartCoroutine("Shot");
+            StartCoroutine(Shot(focus));
         }
 
     }
 
 
-    IEnumerator Swing()
-    {
-        yield return new WaitForSeconds(0.1f);
-        meleeArea.enabled = true;
-        trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.3f);
-        meleeArea.enabled = false;
-
-        yield return new WaitForSeconds(0.3f);
-        trailEffect.enabled = false;
-    }
-    IEnumerator Shot()
+    IEnumerator Shot(int focus)
     {
 
         bulletPos.LookAt(playerAim.aimPos);
+        bullet = bulletBlue;
+        if (focus == 2)
+        {
+            bullet = bulletPurple;
+        }
+        else if (focus == 3)
+        {
+            bullet = bulletRed;
+
+        }
+        else if (focus == 4)
+        {
+            bullet = bulletRainbow;
+        }
+
         GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.AddForce(bulletPos.forward * bulletVelocity, ForceMode.Impulse);
