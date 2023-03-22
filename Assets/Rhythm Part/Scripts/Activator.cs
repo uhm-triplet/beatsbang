@@ -24,9 +24,15 @@ public class Activator : MonoBehaviour
 
     SongManager sm;
 
+    AudioSource hit;
+    AudioSource miss;
+
     void Awake()
     {
         sm = GameObject.Find("SongManager").GetComponent<SongManager>();
+
+        miss = GameObject.Find("SFX/Rhythm/Miss").GetComponent<AudioSource>();
+        hit = GameObject.Find("SFX/Rhythm/Hit").GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -56,6 +62,14 @@ public class Activator : MonoBehaviour
         {
             sr.color = original;
             // holding = false;
+        }
+        if (Input.GetKeyDown(key))
+        {
+            hit.Play();
+            if (miss.isPlaying)
+            {
+                miss.Stop();
+            }
         }
     }
     void SingleNote()
@@ -110,7 +124,7 @@ public class Activator : MonoBehaviour
     {
         active = false;
         gm.GetComponent<GameManagerRhythm>().ResetStreak();
-
+        miss.Play();
         Instantiate(missEffect, effectZone.position, missEffect.transform.rotation);
     }
 
