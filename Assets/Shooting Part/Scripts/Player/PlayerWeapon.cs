@@ -109,8 +109,11 @@ public class PlayerWeapon : MonoBehaviour
     void Grenade()
     {
         if (playerState.hasGrenades == 0) return;
+
         if (gDown && !isReloading)
         {
+            animator.SetTrigger("doGrenade");
+
             grenadePos.LookAt(playerAim.aimPos);
             GameObject instantGrenade = Instantiate(grenadeObj, grenadePos.position, grenadePos.rotation);
             Rigidbody grenadeRigid = instantGrenade.GetComponent<Rigidbody>();

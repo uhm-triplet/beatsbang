@@ -130,10 +130,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  damage: 7
   rate: 0.1
   bulletPos: {fileID: 8189835802887573753}
   bullet: {fileID: 8584491280387882283, guid: dad56394ce182d647882743f2551d2ad, type: 3}
+  bulletBlue: {fileID: 0}
+  bulletPurple: {fileID: 0}
+  bulletRed: {fileID: 0}
+  bulletRainbow: {fileID: 0}
   bulletVelocity: 200
   bulletCasePos: {fileID: 9122578501232673003}
   bulletCase: {fileID: 4753449456846808434, guid: fbb9c8f81ea8878418351c3068314235, type: 3}
@@ -180,7 +183,6 @@ Transform:
   - {fileID: 8189835802887573753}
   - {fileID: 8189835802912013536}
   - {fileID: 8189835802948685868}
-  - {fileID: 8189835802980815286}
   - {fileID: 8189835801798272945}
   - {fileID: 8189835802037613486}
   m_Father: {fileID: 0}
@@ -369,6 +371,7 @@ MonoBehaviour:
   hasGrenades: 2
   ammo: 0
   health: 100
+  focus: 1
   maxAmmo: 999
   maxHealth: 100
   maxHasGrenades: 4
@@ -376,6 +379,7 @@ MonoBehaviour:
   isDead: 0
   equipWeapon: {fileID: 8189835801268629265}
   gameManager: {fileID: 0}
+  damageScreen: {fileID: 0}
 --- !u!1 &7810079077354456966
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,10 +505,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  damage: 7
   rate: 0.1
   bulletPos: {fileID: 8189835802887573753}
   bullet: {fileID: 8584491280387882283, guid: dad56394ce182d647882743f2551d2ad, type: 3}
+  bulletBlue: {fileID: 0}
+  bulletPurple: {fileID: 0}
+  bulletRed: {fileID: 0}
+  bulletRainbow: {fileID: 0}
   bulletVelocity: 200
   bulletCasePos: {fileID: 8189835802551358639}
   bulletCase: {fileID: 4753449456846808434, guid: fbb9c8f81ea8878418351c3068314235, type: 3}
@@ -812,10 +819,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  damage: 20
   rate: 0.4
   bulletPos: {fileID: 8189835802887573753}
   bullet: {fileID: 5354426998686804237, guid: 475961083ce81fc40a0e9f1ce38407dc, type: 3}
+  bulletBlue: {fileID: 0}
+  bulletPurple: {fileID: 0}
+  bulletRed: {fileID: 0}
+  bulletRainbow: {fileID: 0}
   bulletVelocity: 200
   bulletCasePos: {fileID: 8189835801414791820}
   bulletCase: {fileID: 4753449456846808434, guid: fbb9c8f81ea8878418351c3068314235, type: 3}
@@ -995,7 +1005,7 @@ RectTransform:
   m_Children:
   - {fileID: 8189835801412743230}
   m_Father: {fileID: 2325157462221116445}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6302,7 +6312,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2325157462221116445}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8189835802037613481
 MeshFilter:
@@ -6735,10 +6745,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  damage: 25
   rate: 0.8
   bulletPos: {fileID: 0}
   bullet: {fileID: 0}
+  bulletBlue: {fileID: 0}
+  bulletPurple: {fileID: 0}
+  bulletRed: {fileID: 0}
+  bulletRainbow: {fileID: 0}
   bulletVelocity: 0
   bulletCasePos: {fileID: 0}
   bulletCase: {fileID: 0}
@@ -17476,13 +17489,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8189835802980815281}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.55, y: 1.38, z: -0.67}
+  m_LocalRotation: {x: -0.0000000051954645, y: -0.000000010064877, z: -0.000000052503292, w: 1}
+  m_LocalPosition: {x: -0.97, y: 0.2, z: -0.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2325157462221116445}
-  m_RootOrder: 6
+  m_Father: {fileID: 3588331528135228936}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8189835803015526428
 GameObject:
@@ -22798,6 +22811,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d85e3d8c1229c1648b3afbb8f0457f7f, type: 3}
+--- !u!4 &3588331528135228936 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1781711941500957874, guid: d85e3d8c1229c1648b3afbb8f0457f7f, type: 3}
+  m_PrefabInstance: {fileID: 6235874624414299462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5075649965201914136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8000061795802592162, guid: d85e3d8c1229c1648b3afbb8f0457f7f, type: 3}
