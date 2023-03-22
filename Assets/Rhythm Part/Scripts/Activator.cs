@@ -65,11 +65,11 @@ public class Activator : MonoBehaviour
         }
         if (Input.GetKeyDown(key))
         {
-            if (hit.isPlaying)
+            hit.Play();
+            if (miss.isPlaying)
             {
-                hit.Stop();
-                hit.Play();
-            } 
+                miss.Stop();
+            }
         }
     }
     void SingleNote()
