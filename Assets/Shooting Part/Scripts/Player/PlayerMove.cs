@@ -80,10 +80,10 @@ public class PlayerMove : MonoBehaviour
         if (isDodge)
             moveVec = dodgeVec;
         if (runDown && !playerWeapon.isReloading)
-            controller.Move(moveVec * speed * Time.deltaTime);
+            controller.Move(moveVec * speed * 1.2f * Time.deltaTime);
 
         else
-            controller.Move(moveVec * speed * 0.6f * Time.deltaTime);
+            controller.Move(moveVec * speed * 0.7f * Time.deltaTime);
 
         animator.SetBool("isWalk", moveVec != Vector3.zero);
         animator.SetBool("isRun", runDown && !playerWeapon.isReloading);
@@ -159,7 +159,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetTrigger("doDodge");
             isDodge = true;
 
-            Invoke("endDodge", 0.1f);
+            Invoke("endDodge", 0.2f);
             //쿨타임 만들고 싶으면 endDodge를 두개로 쪼개서 invoke 시간 따로
         }
 

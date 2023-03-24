@@ -43,6 +43,8 @@ public class PlayerState : MonoBehaviour
     private AudioSource hitSound;
 
     [SerializeField] GameObject damageScreen;
+    [SerializeField] GameObject lowHpScreen;
+    bool isDecreasing = true;
 
 
     void Awake()
@@ -61,6 +63,7 @@ public class PlayerState : MonoBehaviour
         // Interaction();
         getInput();
         changeDmgScreen();
+        LowHp();
         // Swap();
     }
 
@@ -152,6 +155,7 @@ public class PlayerState : MonoBehaviour
         if (health <= 0)
         {
             OnDie();
+            health = 0;
         }
 
         var color = damageScreen.GetComponent<Image>().color;
@@ -166,7 +170,7 @@ public class PlayerState : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         if (isBossAttack)
             rigid.velocity = Vector3.zero;
         isDamage = false;
@@ -175,14 +179,59 @@ public class PlayerState : MonoBehaviour
 
     void changeDmgScreen()
     {
-        if (damageScreen != null)
-        {
-            if (damageScreen.GetComponent<Image>().color.a > 0)
-            {
-                var color = damageScreen.GetComponent<Image>().color;
-                color.a -= 0.02f;
-                damageScreen.GetComponent<Image>().color = color;
 
+        if (damageScreen.GetComponent<Image>().color.a > 0)
+        {
+            var color = damageScreen.GetComponent<Image>().color;
+            color.a -= 0.02f;
+            damageScreen.GetComponent<Image>().color = color;
+
+        }
+    }
+
+    void LowHp()
+    {
+        if (health <= 30)
+        {
+            Debug.Log(isDecreasing);
+            lowHpScreen.SetActive(true);
+            if (isDecreasing)
+                LowHpDown();
+            else
+                LowHpUp();
+
+        }
+        else
+        {
+            lowHpScreen.SetActive(false);
+        }
+    }
+
+    void LowHpDown()
+    {
+        if (lowHpScreen.GetComponent<Image>().color.a > 0)
+        {
+            var color = lowHpScreen.GetComponent<Image>().color;
+            color.a -= 0.005f;
+            lowHpScreen.GetComponent<Image>().color = color;
+            if (color.a <= 0)
+            {
+                isDecreasing = false;
+            }
+        }
+
+    }
+
+    void LowHpUp()
+    {
+        if (lowHpScreen.GetComponent<Image>().color.a < 0.15)
+        {
+            var color = lowHpScreen.GetComponent<Image>().color;
+            color.a += 0.005f;
+            lowHpScreen.GetComponent<Image>().color = color;
+            if (color.a >= 0.15)
+            {
+                isDecreasing = true;
             }
         }
     }

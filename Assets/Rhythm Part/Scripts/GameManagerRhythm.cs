@@ -193,7 +193,7 @@ public class GameManagerRhythm : MonoBehaviour
     {
         if (currentMode == Mode.Ammo)
         {
-            playerState.ammo += multiplier + 1;
+            playerState.ammo += multiplier + 3;
             if (playerState.ammo > playerState.maxAmmo)
                 playerState.ammo = playerState.maxAmmo;
 
@@ -206,7 +206,7 @@ public class GameManagerRhythm : MonoBehaviour
         }
         else if (currentMode == Mode.Focus)
         {
-            focus += multiplier;
+            focus += multiplier + 1;
             if (focus < 100)
                 playerState.focus = 1;
             else if (focus < 200)
