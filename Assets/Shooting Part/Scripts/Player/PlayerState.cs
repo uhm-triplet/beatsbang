@@ -193,7 +193,6 @@ public class PlayerState : MonoBehaviour
     {
         if (health <= 30)
         {
-            Debug.Log(isDecreasing);
             lowHpScreen.SetActive(true);
             if (isDecreasing)
                 LowHpDown();

@@ -19,7 +19,6 @@ public class debugButton : MonoBehaviour
     {
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("Button working");
     }
 
     void debug()

@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public GameManagerRhythm rhythmManager;
 
-
+    bool stageCleared = false;
 
 
 
@@ -91,55 +91,22 @@ public class GameManager : MonoBehaviour
             if (stage == 1)
             {
                 enemyList.Add(0);
-                enemyACnt++;
             }
             else if (stage == 2)
             {
                 int ran = Random.Range(0, 2);
                 enemyList.Add(ran);
-                switch (ran)
-                {
-                    case 0:
-                        enemyACnt++;
-                        break;
-                    case 1:
-                        enemyBCnt++;
-                        break;
-                }
+
             }
             else if (stage == 3)
             {
                 int ran = Random.Range(0, 3);
                 enemyList.Add(ran);
-                switch (ran)
-                {
-                    case 0:
-                        enemyACnt++;
-                        break;
-                    case 1:
-                        enemyBCnt++;
-                        break;
-                    case 2:
-                        enemyCCnt++;
-                        break;
-                }
             }
             else if (stage == 4 && i <= 20)
             {
                 int ran = Random.Range(0, 3);
                 enemyList.Add(ran);
-                switch (ran)
-                {
-                    case 0:
-                        enemyACnt++;
-                        break;
-                    case 1:
-                        enemyBCnt++;
-                        break;
-                    case 2:
-                        enemyCCnt++;
-                        break;
-                }
             }
 
         }
@@ -157,17 +124,39 @@ public class GameManager : MonoBehaviour
         while (enemyList.Count > 0)
         {
             int ranZone = Random.Range(0, 4);
+            switch (enemyList[0])
+            {
+                case 0:
+                    enemyACnt++;
+                    break;
+                case 1:
+                    enemyBCnt++;
+                    break;
+                case 2:
+                    enemyCCnt++;
+                    break;
+            }
             GameObject instantEnemy = Instantiate(enemies[enemyList[0]], enemyZones[ranZone].position, enemyZones[ranZone].rotation);
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = playerState.transform;
             enemy.gameManager = this;
             enemyList.RemoveAt(0);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
         }
 
-        while (playTime > 0 || (enemyACnt + enemyBCnt + enemyCCnt + enemyDCnt > 0))
+        if (stage != 4)
         {
-            yield return null;
+            while (playTime > 0)
+            {
+                yield return null;
+            }
+        }
+        else
+        {
+            while (playTime > 0 || enemyDCnt > 0)
+            {
+                yield return null;
+            }
         }
 
         yield return new WaitForSeconds(1f);
@@ -177,7 +166,7 @@ public class GameManager : MonoBehaviour
 
     void StageEnd()
     {
-        Debug.Log("Stage Clear");
+        stageCleared = true;
         PlayerPrefs.SetInt($"Stage{stage}Clear", 1);
         PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
         if (PlayerPrefs.GetInt($"Stage{stage}BestScore") < PlayerPrefs.GetInt($"Stage{stage}Score"))
@@ -191,11 +180,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
-        PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        gameOverUI.SetActive(true);
+        if (!stageCleared)
+        {
+            PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            gameOverUI.SetActive(true);
+        }
     }
     // Update is called once per frame
     void LateUpdate()
