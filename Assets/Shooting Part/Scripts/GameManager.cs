@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
             boss = instantEnemy.GetComponent<Boss>();
         }
 
-        while (enemyList.Count > 0)
+        while (enemyList.Count > 0 && playTime != 0)
         {
             int ranZone = Random.Range(0, 4);
             switch (enemyList[0])

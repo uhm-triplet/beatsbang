@@ -22,6 +22,11 @@ namespace Game
         public AudioSource buttonClickSound;
         public AudioSource testButtonClickSound;
 
+        void Awake()
+        {
+
+        }
+
         // Start is called before the first frame update
 
         public void StartSingleplay()
@@ -60,34 +65,34 @@ namespace Game
 
         }
 
-        public async void OnHostClicked()
-        {
-            bool succeeded = await GameLobbyManager.Instance.CreateLobby();
-            buttonClickSound.Play();
-            if (succeeded)
-            {
-                SceneManager.LoadSceneAsync("Lobby");
-            }
+        // public async void OnHostClicked()
+        // {
+        //     bool succeeded = await GameLobbyManager.Instance.CreateLobby();
+        //     buttonClickSound.Play();
+        //     if (succeeded)
+        //     {
+        //         SceneManager.LoadSceneAsync("Lobby");
+        //     }
 
-        }
+        // }
 
-        public void OnJoinClicked()
-        {
-            codeInputField.gameObject.SetActive(true);
-            submitCodeButton.gameObject.SetActive(true);
-            buttonClickSound.Play();
-        }
+        // public void OnJoinClicked()
+        // {
+        //     codeInputField.gameObject.SetActive(true);
+        //     submitCodeButton.gameObject.SetActive(true);
+        //     buttonClickSound.Play();
+        // }
 
-        public async void OnSubmitCodeClicked()
-        {
-            string code = codeText.text;
-            code = code.Substring(0, code.Length - 1);
-            buttonClickSound.Play();
-            bool succeeded = await GameLobbyManager.Instance.JoinLobby(code);
-            if (succeeded)
-            {
-                SceneManager.LoadSceneAsync("Lobby");
-            }
-        }
+        // public async void OnSubmitCodeClicked()
+        // {
+        //     string code = codeText.text;
+        //     code = code.Substring(0, code.Length - 1);
+        //     buttonClickSound.Play();
+        //     bool succeeded = await GameLobbyManager.Instance.JoinLobby(code);
+        //     if (succeeded)
+        //     {
+        //         SceneManager.LoadSceneAsync("Lobby");
+        //     }
+        // }
     }
 }
