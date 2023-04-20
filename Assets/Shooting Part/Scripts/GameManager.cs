@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     public GameManagerRhythm rhythmManager;
 
     bool stageCleared = false;
+    bool stageFailed = false;
 
 
 
@@ -166,22 +167,26 @@ public class GameManager : MonoBehaviour
 
     void StageEnd()
     {
-        stageCleared = true;
-        PlayerPrefs.SetInt($"Stage{stage}Clear", 1);
-        PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
-        if (PlayerPrefs.GetInt($"Stage{stage}BestScore") < PlayerPrefs.GetInt($"Stage{stage}Score"))
+        if (!stageFailed)
         {
-            PlayerPrefs.SetInt($"Stage{stage}BestScore", rhythmManager.score);
+            stageCleared = true;
+            PlayerPrefs.SetInt($"Stage{stage}Clear", 1);
+            PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
+            if (PlayerPrefs.GetInt($"Stage{stage}BestScore") < PlayerPrefs.GetInt($"Stage{stage}Score"))
+            {
+                PlayerPrefs.SetInt($"Stage{stage}BestScore", rhythmManager.score);
+            }
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            stageClearUI.SetActive(true);
         }
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        stageClearUI.SetActive(true);
     }
 
     public void GameOver()
     {
         if (!stageCleared)
         {
+            stageFailed = true;
             PlayerPrefs.SetInt($"Stage{stage}Score", rhythmManager.score);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
