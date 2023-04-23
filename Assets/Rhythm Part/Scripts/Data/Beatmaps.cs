@@ -18,6 +18,9 @@ public class Beatmaps
     static float[] Stage1Left =
     {
 
+                        // easy intro
+                        2.00f, 2.50f, 3.00f, 3.50f, 4.00f, 4.50f, 5.00f, 5.50f, 6.00f,
+
                         // first note of each chorus will have left+right then 0.40f gap
                         // chorus notes every 0.35f 
                         // last note of each chorus will have 0.40f gap then left+right
@@ -120,6 +123,9 @@ public class Beatmaps
     };
     static float[] Stage1Right =
     {
+
+                        // easy intro
+                        2.00f, 2.50f, 3.00f, 3.50f, 4.00f, 4.50f, 5.00f, 5.50f, 6.00f,
 
                         // chorus 1x
                         7.05f,
