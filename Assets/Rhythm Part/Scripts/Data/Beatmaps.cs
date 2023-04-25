@@ -48,6 +48,9 @@ public class Beatmaps
                         17.75f, 18.45f, 19.15f,
                         19.90f,
 
+                        // easy block for extra notes
+                        21.90f, 22.40f, 22.90f, 23.40f, 23.90f, 24.40f, 24.90f, 25.40f, 25.90f, 
+
                         // bridge1 (slow)
                         27.90f, 29.60f, 31.20f, 32.80f,
 
@@ -146,6 +149,9 @@ public class Beatmaps
                         17.35f,
                         18.10f, 18.80f, 19.50f,
                         19.90f, 
+
+                        // easy block for extra notes
+                        21.90f, 22.40f, 22.90f, 23.40f, 23.90f, 24.40f, 24.90f, 25.40f, 25.90f,
 
                         // bridge1 (slow)
                         27.90f, 29.60f, 31.20f, 32.80f,
