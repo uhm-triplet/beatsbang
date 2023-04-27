@@ -11334,7 +11334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &164287776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46509,7 +46509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &659960073
 Transform:
   m_ObjectHideFlags: 0
@@ -47004,7 +47004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &672870677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47827,7 +47827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &728206472
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74275,9 +74275,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.2
+    x: 0
     y: 0
-    width: 0.8
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -101566,8 +101566,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.2
-    height: 1
+    width: 0
+    height: 0
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -137634,7 +137634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1991143421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138160,7 +138160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2019354437
 RectTransform:
   m_ObjectHideFlags: 0
@@ -138379,7 +138379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2034543153
 RectTransform:
   m_ObjectHideFlags: 0
@@ -138983,7 +138983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2069257157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -145209,17 +145209,29 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8189835801798272957, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: ammo
-      value: 0
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: focus
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: health
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: maxAmmo
-      value: 500
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: maxHealth
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802118398760, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: equipWeapon
@@ -145264,6 +145276,18 @@ PrefabInstance:
     - target: {fileID: 8189835802912013536, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1000061
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189835802912013536, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189835802912013536, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189835802912013536, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8189835802944947608, guid: 988380d2936a83c44a536f0a4632dc3c, type: 3}
       propertyPath: m_IsActive
